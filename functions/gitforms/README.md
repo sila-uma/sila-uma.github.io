@@ -73,4 +73,14 @@ Variables) — следующий push пересоберёт сайт с раб
 
 После правок в `index.js` повторите шаг 4 (`yc serverless function version
 create …`) — Yandex Cloud создаёт новую версию функции и переключает на неё
-публичный URL.
+публичный URL. Yandex не хранит переменные окружения между версиями — при
+каждом обновлении их нужно передавать заново целиком, включая ключ.
+
+## Текущий деплой (для справки)
+
+- Функция: `sila-uma-gitforms`, id `d4et5lbdm5c461hfveit`
+- Публичный URL: `https://functions.yandexcloud.net/d4et5lbdm5c461hfveit`
+  (это и есть значение `NEXT_PUBLIC_FORMS_ENDPOINT`)
+- Yandex Cloud: cloud `b1gl9o79tmsuo746kie0`, folder `b1ghq8gq2gaah0ohcvfg`
+- GitHub App: `sila-uma`, App ID `5023218`, Installation ID `163545663`
+  (на репозиторий `sila-uma/sila-uma.github.io`)
