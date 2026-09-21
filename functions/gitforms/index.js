@@ -131,8 +131,8 @@ export async function handler(event) {
     });
 
     if (!issueRes.ok) {
-      const text = await issueRes.text().catch(() => "");
-      return { statusCode: 502, headers: corsHeaders(), body: `Upstream error: ${issueRes.status} ${text}` };
+      console.error("gitforms upstream error:", issueRes.status, await issueRes.text().catch(() => ""));
+      return { statusCode: 502, headers: corsHeaders(), body: "Upstream error" };
     }
 
     return {
@@ -142,7 +142,6 @@ export async function handler(event) {
     };
   } catch (err) {
     console.error("gitforms error:", err && err.message, err && err.stack);
-    // TEMP: surface the real error for debugging. Revert to a generic message before real traffic.
-    return { statusCode: 500, headers: corsHeaders(), body: `Server error: ${err && err.message}` };
+    return { statusCode: 500, headers: corsHeaders(), body: "Server error" };
   }
 }
