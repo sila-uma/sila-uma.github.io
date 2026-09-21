@@ -2,8 +2,7 @@ backend:
   name: github
   repo: sila-uma/sila-uma.github.io
   branch: main
-  auth_type: pkce
-  app_id: Iv23lijBAIlCb0UzURGQ
+  base_url: https://sila-uma.github.io/oauth
 
 publish_mode: simple
 media_folder: "public/images/uploads"
