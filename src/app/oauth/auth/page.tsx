@@ -3,14 +3,15 @@
 import { useEffect } from "react";
 
 // Decap's github backend (no PKCE support there — that's GitLab-only) always
-// opens its login popup at `${base_url}/auth`. GitHub Pages serves real
-// subpaths, so this static page plays the "start" half of the OAuth flow:
-// it just redirects to GitHub with our GitHub App's client_id. The "finish"
-// half (exchanging the code — needs the client secret) can't happen in the
-// browser, so redirect_uri points at the Yandex Cloud Function that does it
-// server-side (see functions/decap-oauth/).
+// opens its login popup at `${base_url}/${auth_endpoint}` (config.yml points
+// that at this page). This is just the "start" half of the OAuth flow: it
+// redirects to GitHub with our GitHub App's client_id. redirect_uri points
+// at our own /oauth/callback page (not the Yandex function directly) — the
+// page that does window.opener.postMessage(...) must be served from the
+// same origin as config.yml's base_url, which a functions.yandexcloud.net
+// URL can never be. See src/app/oauth/callback/page.tsx.
 const CLIENT_ID = "Iv23lijBAIlCb0UzURGQ";
-const CALLBACK_URL = "https://functions.yandexcloud.net/d4em74tq5amiq7d1pb8o";
+const CALLBACK_URL = "https://sila-uma.github.io/oauth/callback";
 
 export default function OAuthAuthPage() {
   useEffect(() => {

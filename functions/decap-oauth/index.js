@@ -1,29 +1,37 @@
-const { GITHUB_APP_CLIENT_ID, GITHUB_APP_CLIENT_SECRET, SELF_URL } = process.env;
+const { GITHUB_APP_CLIENT_ID, GITHUB_APP_CLIENT_SECRET, REDIRECT_URI, ALLOWED_ORIGIN } = process.env;
 
-function html(body) {
+function corsHeaders() {
   return {
-    statusCode: 200,
-    headers: { "Content-Type": "text/html; charset=utf-8" },
-    body,
+    "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
   };
 }
 
-// Decap's github backend has no PKCE support (that's GitLab-only) and always
-// opens a popup at `${base_url}/auth?...`. We set base_url to this function's
-// own invoke URL, so this single endpoint plays both roles: with no `code`
-// query param yet, it starts the GitHub OAuth flow; once GitHub redirects
-// back here with a `code`, it exchanges it and hands the token to the popup
-// opener via the postMessage handshake Decap listens for.
-export async function handler(event) {
-  const params = event.queryStringParameters || {};
+function json(statusCode, data) {
+  return {
+    statusCode,
+    headers: { "Content-Type": "application/json", ...corsHeaders() },
+    body: JSON.stringify(data),
+  };
+}
 
-  if (!params.code) {
-    const authorizeUrl = new URL("https://github.com/login/oauth/authorize");
-    authorizeUrl.searchParams.set("client_id", GITHUB_APP_CLIENT_ID);
-    authorizeUrl.searchParams.set("redirect_uri", SELF_URL);
-    authorizeUrl.searchParams.set("scope", "repo");
-    if (params.state) authorizeUrl.searchParams.set("state", params.state);
-    return { statusCode: 302, headers: { Location: authorizeUrl.toString() }, body: "" };
+// Decap's popup-handshake protocol requires the page that calls
+// window.opener.postMessage(...) to be served from an origin that exactly
+// equals `base_url` in config.yml (decap-cms-lib-auth checks
+// `e.origin === this.base_url`). That page is a static route on our own
+// site (src/app/oauth/callback/), not this function — a Yandex function's
+// origin can never match a github.io base_url. So this function is just a
+// plain CORS'd JSON API: given the OAuth `code`, exchange it for a token.
+// The static callback page calls this via fetch and does the postMessage
+// handshake itself, from the right origin.
+export async function handler(event) {
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 204, headers: corsHeaders(), body: "" };
+  }
+
+  const code = (event.queryStringParameters || {}).code;
+  if (!code) {
+    return json(400, { error: "missing code" });
   }
 
   try {
@@ -33,39 +41,20 @@ export async function handler(event) {
       body: JSON.stringify({
         client_id: GITHUB_APP_CLIENT_ID,
         client_secret: GITHUB_APP_CLIENT_SECRET,
-        code: params.code,
-        redirect_uri: SELF_URL,
+        code,
+        redirect_uri: REDIRECT_URI,
       }),
     });
     const data = await tokenRes.json();
 
     if (!data.access_token) {
-      const message = JSON.stringify({ message: data.error_description || "no access_token" });
-      return html(`<script>
-        (function() {
-          function receive(e) {
-            window.opener.postMessage('authorization:github:error:${message}', e.origin);
-            window.removeEventListener("message", receive, false);
-          }
-          window.addEventListener("message", receive, false);
-          window.opener.postMessage("authorizing:github", "*");
-        })();
-      </script>`);
+      console.error("decap-oauth exchange failed:", data);
+      return json(400, { error: data.error_description || data.error || "no access_token" });
     }
 
-    const payload = JSON.stringify({ token: data.access_token, provider: "github" });
-    return html(`<script>
-      (function() {
-        function receive(e) {
-          window.opener.postMessage('authorization:github:success:${payload}', e.origin);
-          window.removeEventListener("message", receive, false);
-        }
-        window.addEventListener("message", receive, false);
-        window.opener.postMessage("authorizing:github", "*");
-      })();
-    </script>`);
+    return json(200, { token: data.access_token });
   } catch (err) {
     console.error("decap-oauth error:", err && err.message, err && err.stack);
-    return html(`<p>OAuth error, check function logs.</p>`);
+    return json(500, { error: "server error" });
   }
 }

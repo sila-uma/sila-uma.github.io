@@ -2,7 +2,10 @@ backend:
   name: github
   repo: sila-uma/sila-uma.github.io
   branch: main
-  base_url: https://sila-uma.github.io/oauth
+  # Must be a bare origin, no path: decap-cms-lib-auth checks the popup's
+  # postMessage e.origin === base_url exactly (see src/app/oauth/callback/).
+  base_url: https://sila-uma.github.io
+  auth_endpoint: oauth/auth
 
 publish_mode: simple
 media_folder: "public/images/uploads"
