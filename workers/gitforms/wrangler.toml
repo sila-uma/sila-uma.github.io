@@ -1,0 +1,13 @@
+name = "sila-uma-gitforms"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[vars]
+GITHUB_APP_ID = "5023218"
+GITHUB_INSTALLATION_ID = "163545663"
+GITHUB_REPO = "sila-uma/sila-uma.github.io"
+ALLOWED_ORIGIN = "https://sila-uma.github.io"
+
+# GITHUB_PRIVATE_KEY is a secret, not a var — set it with:
+#   wrangler secret put GITHUB_PRIVATE_KEY
+# (paste the PKCS8-converted .pem contents, see README.md in this folder)

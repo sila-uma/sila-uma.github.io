@@ -1,0 +1,31 @@
+title: Технопарк «Сила ума»
+tagline: Детский технопарк в Цхинвале — робототехника, БПЛА, промдизайн, лазерные технологии, IT и медиапроизводство
+hero_kicker: Республиканская станция юных техников, Цхинвал, Южная Осетия
+hero_headline: Сила ума
+hero_subline: >-
+  24 августа 2026 года на базе Станции юных техников открылся детский технопарк
+  «Сила ума» — шесть направлений подготовки, современное оборудование и
+  методическая поддержка РГПУ им. А. И. Герцена.
+hero_cta_label: Оставить заявку
+hero_cta_target: form
+sections:
+  - id: hero
+    visible: true
+  - id: about
+    visible: true
+  - id: directions
+    visible: true
+  - id: news
+    visible: true
+  - id: gallery
+    visible: true
+  - id: partners
+    visible: true
+  - id: enrollment
+    visible: false
+  - id: documents
+    visible: false
+  - id: contacts
+    visible: true
+  - id: form
+    visible: true

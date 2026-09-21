@@ -1,0 +1,128 @@
+backend:
+  name: github
+  repo: sila-uma/sila-uma.github.io
+  branch: main
+  auth_type: pkce
+  app_id: Iv23lijBAIlCb0UzURGQ
+
+publish_mode: simple
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "settings"
+    label: "Настройки сайта"
+    files:
+      - file: "content/settings/site.yml"
+        label: "Главная — общие настройки"
+        name: "site"
+        fields:
+          - { label: "Название сайта", name: "title", widget: "string" }
+          - { label: "Описание (для поисковиков)", name: "tagline", widget: "text" }
+          - { label: "Надпись над заголовком баннера", name: "hero_kicker", widget: "string" }
+          - { label: "Заголовок баннера", name: "hero_headline", widget: "string" }
+          - { label: "Подзаголовок баннера", name: "hero_subline", widget: "text" }
+          - { label: "Текст кнопки на баннере", name: "hero_cta_label", widget: "string" }
+          - { label: "Куда ведёт кнопка (id раздела)", name: "hero_cta_target", widget: "string" }
+          - label: "Разделы сайта — порядок и видимость"
+            name: "sections"
+            widget: "list"
+            hint: "id: hero / about / directions / news / gallery / partners / enrollment / documents / contacts / form"
+            fields:
+              - { label: "ID раздела", name: "id", widget: "string" }
+              - { label: "Показывать на сайте", name: "visible", widget: "boolean", default: true }
+      - file: "content/settings/about.yml"
+        label: "Раздел «Что такое»"
+        name: "about"
+        fields:
+          - { label: "Показывать раздел", name: "visible", widget: "boolean", default: true }
+          - { label: "Надпись над заголовком", name: "eyebrow", widget: "string" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Описание", name: "body", widget: "text" }
+          - label: "Цифры"
+            name: "stats"
+            widget: "list"
+            fields:
+              - { label: "Значение", name: "value", widget: "string" }
+              - { label: "Подпись", name: "label", widget: "string" }
+      - file: "content/settings/contacts.yml"
+        label: "Контакты"
+        name: "contacts"
+        fields:
+          - { label: "Показывать раздел", name: "visible", widget: "boolean", default: true }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Адрес", name: "address", widget: "text" }
+          - { label: "Заметка", name: "note", widget: "string", required: false }
+          - { label: "Телефон", name: "phone", widget: "string", required: false }
+          - { label: "E-mail", name: "email", widget: "string", required: false }
+          - { label: "ВКонтакте (ссылка)", name: "vk", widget: "string", required: false }
+          - { label: "Embed карты (ссылка на iframe)", name: "map_embed", widget: "string", required: false }
+      - file: "content/settings/enrollment.yml"
+        label: "Раздел «Как поступить»"
+        name: "enrollment"
+        fields:
+          - { label: "Показывать раздел", name: "visible", widget: "boolean", default: false }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "body", widget: "text" }
+      - file: "content/settings/documents.yml"
+        label: "Раздел «Документы»"
+        name: "documents"
+        fields:
+          - { label: "Показывать раздел", name: "visible", widget: "boolean", default: false }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "body", widget: "text" }
+      - file: "content/gallery/gallery.yml"
+        label: "Фотогалерея"
+        name: "gallery"
+        fields:
+          - { label: "Показывать раздел", name: "visible", widget: "boolean", default: true }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - label: "Фотографии"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Изображение", name: "image", widget: "image" }
+              - { label: "Подпись", name: "caption", widget: "string", required: false }
+
+  - name: "directions"
+    label: "Направления"
+    folder: "content/directions"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Название", name: "title", widget: "string" }
+      - { label: "Код (короткая метка)", name: "code", widget: "string" }
+      - label: "Иконка"
+        name: "icon"
+        widget: "select"
+        options: ["drone", "robot", "cube", "laser", "code", "camera"]
+      - { label: "Порядок", name: "order", widget: "number" }
+      - { label: "Показывать", name: "visible", widget: "boolean", default: true }
+      - { label: "Краткое описание (для карточки)", name: "summary", widget: "string" }
+      - { label: "Полное описание", name: "body", widget: "markdown" }
+
+  - name: "news"
+    label: "Новости"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Заголовок", name: "title", widget: "string" }
+      - { label: "Дата", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Показывать", name: "visible", widget: "boolean", default: true }
+      - { label: "Обложка", name: "cover", widget: "image", required: false }
+      - { label: "Краткое описание (для карточки)", name: "summary", widget: "text" }
+      - { label: "Текст новости", name: "body", widget: "markdown" }
+
+  - name: "partners"
+    label: "Партнёры"
+    folder: "content/partners"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Название", name: "title", widget: "string" }
+      - { label: "Порядок", name: "order", widget: "number" }
+      - { label: "Показывать", name: "visible", widget: "boolean", default: true }
+      - { label: "Логотип", name: "logo", widget: "image" }
+      - { label: "Ссылка на сайт", name: "url", widget: "string" }
+      - { label: "Описание", name: "body", widget: "markdown" }
