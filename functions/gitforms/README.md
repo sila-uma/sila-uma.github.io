@@ -61,6 +61,6 @@ Variables) — следующий push пересоберёт сайт с раб
 
 ## Обновление кода
 
-После правок в `index.mjs` повторите шаг 4 (`yc serverless function version
+После правок в `index.js` повторите шаг 4 (`yc serverless function version
 create …`) — Yandex Cloud создаёт новую версию функции и переключает на неё
 публичный URL.
