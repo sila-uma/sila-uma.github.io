@@ -8,7 +8,14 @@
 Функция сама умеет проверять RSA-подпись через `node:crypto`, который (в
 отличие от WebCrypto в Cloudflare Workers) понимает PKCS1-ключ
 (`-----BEGIN RSA PRIVATE KEY-----`) как есть — конвертировать в PKCS8 не
-нужно, используйте .pem прямо как скачали в настройках GitHub App.
+нужно.
+
+Ключ передаётся в переменную `GITHUB_PRIVATE_KEY_B64` в base64, одной
+строкой, а не как есть. Это не для маскировки — у `yc`-шного `--environment`
+парсинг сделан через CSV и **режет значение по первому переносу строки**,
+так что «как есть» в переменную попадает только `-----BEGIN RSA PRIVATE
+KEY-----` без самого ключа. Base64 убирает переносы строк, значение
+становится однострочным, и парсер его больше не ломает.
 
 ## Разово, перед первым деплоем
 
@@ -26,7 +33,7 @@
    ```bash
    yc serverless function version create \
      --function-name sila-uma-gitforms \
-     --runtime nodejs20 \
+     --runtime nodejs22 \
      --entrypoint index.handler \
      --memory 128m \
      --execution-timeout 10s \
@@ -35,12 +42,15 @@
      --environment GITHUB_INSTALLATION_ID=163545663 \
      --environment GITHUB_REPO=sila-uma/sila-uma.github.io \
      --environment ALLOWED_ORIGIN=https://sila-uma.github.io \
-     --environment GITHUB_PRIVATE_KEY="$(cat /path/to/private-key.pem)"
+     --environment GITHUB_PRIVATE_KEY_B64="$(base64 < /path/to/private-key.pem | tr -d '\n')"
    ```
-   Ключ через переменную окружения — самый простой вариант. Надёжнее хранить
-   его в [Yandex Lockbox](https://yandex.cloud/ru/docs/lockbox/) и подключать
-   флагом `--secret environment-variable=GITHUB_PRIVATE_KEY,id=<secret-id>,version-id=<version-id>,key=<key>`
-   вместо обычного `--environment`.
+   Ключ через переменную окружения (пусть и в base64) — самый простой
+   вариант. Надёжнее хранить его в
+   [Yandex Lockbox](https://yandex.cloud/ru/docs/lockbox/) и подключать
+   флагом `--secret environment-variable=GITHUB_PRIVATE_KEY_B64,id=<secret-id>,version-id=<version-id>,key=<key>`
+   вместо обычного `--environment` (тогда и в base64 переводить не
+   обязательно, но код уже настроен именно на base64 — потребуется небольшая
+   правка `index.js`, если решите так делать).
 5. Разрешите анонимные вызовы (форма дергает функцию прямо из браузера, без
    авторизации):
    ```bash

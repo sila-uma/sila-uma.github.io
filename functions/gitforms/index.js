@@ -3,10 +3,17 @@ import { createPrivateKey, sign as nodeSign } from "node:crypto";
 const {
   GITHUB_APP_ID,
   GITHUB_INSTALLATION_ID,
-  GITHUB_PRIVATE_KEY,
+  GITHUB_PRIVATE_KEY_B64,
   GITHUB_REPO,
   ALLOWED_ORIGIN,
 } = process.env;
+
+// yc's --environment flag parses values as CSV under the hood and splits on
+// embedded newlines, so a raw multi-line PEM only ever keeps its first line.
+// Storing it base64-encoded (single line) sidesteps that entirely.
+function privateKeyPem() {
+  return Buffer.from(GITHUB_PRIVATE_KEY_B64, "base64").toString("utf8");
+}
 
 function corsHeaders() {
   return {
@@ -32,7 +39,7 @@ function createAppJwt() {
 
   // node:crypto accepts both PKCS1 ("BEGIN RSA PRIVATE KEY") and PKCS8 PEM as-is —
   // unlike Cloudflare Workers' WebCrypto, no conversion of the App's .pem is needed.
-  const key = createPrivateKey(GITHUB_PRIVATE_KEY);
+  const key = createPrivateKey(privateKeyPem());
   const signature = nodeSign("RSA-SHA256", Buffer.from(unsigned), key);
   return `${unsigned}.${base64url(signature)}`;
 }
@@ -124,7 +131,8 @@ export async function handler(event) {
     });
 
     if (!issueRes.ok) {
-      return { statusCode: 502, headers: corsHeaders(), body: "Upstream error" };
+      const text = await issueRes.text().catch(() => "");
+      return { statusCode: 502, headers: corsHeaders(), body: `Upstream error: ${issueRes.status} ${text}` };
     }
 
     return {
@@ -134,6 +142,7 @@ export async function handler(event) {
     };
   } catch (err) {
     console.error("gitforms error:", err && err.message, err && err.stack);
-    return { statusCode: 500, headers: corsHeaders(), body: "Server error" };
+    // TEMP: surface the real error for debugging. Revert to a generic message before real traffic.
+    return { statusCode: 500, headers: corsHeaders(), body: `Server error: ${err && err.message}` };
   }
 }
