@@ -50,7 +50,10 @@ async function getInstallationToken() {
       },
     }
   );
-  if (!res.ok) throw new Error(`installation token failed: ${res.status}`);
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(`installation token failed: ${res.status} ${text}`);
+  }
   const data = await res.json();
   return data.token;
 }
@@ -129,7 +132,8 @@ export async function handler(event) {
       headers: { "Content-Type": "application/json", ...corsHeaders() },
       body: JSON.stringify({ ok: true }),
     };
-  } catch {
+  } catch (err) {
+    console.error("gitforms error:", err && err.message, err && err.stack);
     return { statusCode: 500, headers: corsHeaders(), body: "Server error" };
   }
 }
