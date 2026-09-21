@@ -1,8 +1,8 @@
 # Сила ума — сайт технопарка
 
 Next.js (static export) + Decap CMS + GitHub Pages. Контент редактируется
-через `/admin/`, форма заявок пишет в Issues этого репозитория через
-Cloudflare Worker и GitHub App `sila-uma`.
+через `/admin/`, форма заявок пишет в Issues этого репозитория через Yandex
+Cloud Function и GitHub App `sila-uma`.
 
 ## Разработка
 
@@ -34,12 +34,13 @@ npm run dev
 
 ## Форма заявок (GitForms)
 
-`workers/gitforms/` — Cloudflare Worker, который получает данные формы и
-создаёт Issue в этом репозитории через тот же GitHub App (installation
-token, без PAT). Инструкция по деплою — `workers/gitforms/README.md`.
-После деплоя воркера пропишите его URL в repository variable
+`functions/gitforms/` — Yandex Cloud Function, которая получает данные формы
+и создаёт Issue в этом репозитории через тот же GitHub App (installation
+token, без PAT). Cloudflare Workers сюда сознательно не используется —
+недоступен из РФ без VPN. Инструкция по деплою — `functions/gitforms/README.md`.
+После деплоя функции пропишите её публичный URL в repository variable
 `NEXT_PUBLIC_FORMS_ENDPOINT` (Settings → Secrets and variables → Actions →
-Variables) — следующий пуш пересоберёт сайт с рабочей формой.
+Variables) — следующий push пересоберёт сайт с рабочей формой.
 
 ## Деплой
 

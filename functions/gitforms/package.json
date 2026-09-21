@@ -1,0 +1,6 @@
+{
+  "name": "sila-uma-gitforms",
+  "private": true,
+  "type": "module",
+  "main": "index.mjs"
+}
