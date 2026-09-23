@@ -2,7 +2,7 @@
 title: Министерство просвещения Российской Федерации
 order: 1
 visible: true
-logo: /images/partners/minprosvet.svg
+logo: /images/partners/minprosvet-rf.png
 url: https://edu.gov.ru/
 ---
 

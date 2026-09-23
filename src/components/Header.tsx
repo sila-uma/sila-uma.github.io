@@ -40,14 +40,23 @@ export function Header({ sections, siteTitle }: { sections: Section[]; siteTitle
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2">
+          <label className="sr-only" htmlFor="site-language">Язык сайта</label>
+          <select
+            id="site-language"
+            defaultValue="ru"
+            title="Русский язык"
+            className="h-10 cursor-pointer rounded-xl border border-[var(--color-line)] bg-white px-3 text-sm font-bold text-[var(--color-ink)] focus:border-[var(--color-blue)]"
+          >
+            <option value="ru">Рус</option>
+          </select>
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--color-line)] bg-white"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--color-line)] bg-white lg:hidden"
           >
             <span className="relative block h-4 w-5" aria-hidden>
               <span className={`absolute left-0 top-0 h-0.5 w-5 bg-[var(--color-ink)] transition ${open ? "translate-y-[7px] rotate-45" : ""}`} />
