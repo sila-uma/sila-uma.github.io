@@ -12,6 +12,10 @@ export function Gallery({ gallery }: { gallery: GallerySettings }) {
   const showNext = () => setActive((current) => current === null ? null : (current + 1) % count);
   const previousSlide = () => setCurrent((index) => (index - 1 + count) % count);
   const nextSlide = () => setCurrent((index) => (index + 1) % count);
+  const visibleItems = Array.from({ length: Math.min(3, count) }, (_, offset) => {
+    const index = (current + offset) % count;
+    return { ...gallery.items[index], index };
+  });
 
   useEffect(() => {
     if (active === null) return;
@@ -45,20 +49,25 @@ export function Gallery({ gallery }: { gallery: GallerySettings }) {
           </div>
         ) : (
           <div>
-            <button
-              type="button"
-              onClick={() => setActive(current)}
-              aria-label={`Открыть фотографию ${current + 1} из ${count}`}
-              className="group relative block aspect-[16/10] w-full cursor-zoom-in overflow-hidden bg-white/10 md:aspect-[16/8]"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={gallery.items[current].image} alt={gallery.items[current].caption ?? ""} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.015]" />
-            </button>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5">
+              {visibleItems.map((item, position) => (
+                <button
+                  key={`${item.index}-${current}`}
+                  type="button"
+                  onClick={() => setActive(item.index)}
+                  aria-label={`Открыть фотографию ${item.index + 1} из ${count}`}
+                  className={`group relative aspect-[4/5] cursor-zoom-in overflow-hidden rounded-[1.5rem] bg-white/10 md:aspect-[4/3] ${position === 2 ? "hidden md:block" : "block"}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={item.image} alt={item.caption ?? ""} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]" />
+                </button>
+              ))}
+            </div>
             <div className="mt-5 flex items-center justify-between border-t border-white/20 pt-5">
               <span className="font-[family-name:var(--font-mono)] text-sm text-white/60">{String(current + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}</span>
               <div className="flex gap-2">
-                <button type="button" onClick={previousSlide} aria-label="Предыдущая фотография" className="grid h-12 w-12 place-items-center border border-white/25 text-xl transition hover:border-white hover:bg-white hover:text-[#101426]">←</button>
-                <button type="button" onClick={nextSlide} aria-label="Следующая фотография" className="grid h-12 w-12 place-items-center border border-white/25 text-xl transition hover:border-white hover:bg-white hover:text-[#101426]">→</button>
+                <button type="button" onClick={previousSlide} aria-label="Предыдущая фотография" className="grid h-12 w-12 place-items-center rounded-full border border-white/25 text-xl transition hover:border-white hover:bg-white hover:text-[#101426]">←</button>
+                <button type="button" onClick={nextSlide} aria-label="Следующая фотография" className="grid h-12 w-12 place-items-center rounded-full border border-white/25 text-xl transition hover:border-white hover:bg-white hover:text-[#101426]">→</button>
               </div>
             </div>
           </div>

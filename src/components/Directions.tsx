@@ -24,13 +24,13 @@ export function Directions({ directions }: { directions: Direction[] }) {
           <h2 className="section-title max-w-2xl">Выбери то, что интересно тебе</h2>
           <p className="max-w-sm text-sm leading-relaxed text-[var(--color-slate)]">Открой карточку, чтобы узнать, чему учатся на каждом направлении и какие проекты можно создать.</p>
         </div>
-        <div className="grid border-l border-t border-[var(--color-line)] md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {directions.map((d, index) => (
               <button
                 key={d.slug}
                 type="button"
                 onClick={() => open(d)}
-                className="group relative min-h-[21rem] cursor-pointer overflow-hidden border-b border-r border-[var(--color-line)] bg-[var(--color-paper)] p-6 text-left transition-colors duration-300 hover:bg-[var(--color-blue)] hover:text-white md:p-8"
+                className="group relative min-h-[21rem] cursor-pointer overflow-hidden rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--color-paper)] p-6 text-left transition-colors duration-300 hover:border-[var(--color-blue)] hover:bg-[var(--color-blue)] hover:text-white md:p-8"
               >
                 <div className="mb-12 flex items-center justify-between font-[family-name:var(--font-mono)] text-xs font-bold tracking-[0.14em] text-[var(--color-slate)] transition-colors group-hover:text-white/70">
                   <span>{String(index + 1).padStart(2, "0")}</span>
@@ -54,12 +54,12 @@ export function Directions({ directions }: { directions: Direction[] }) {
         className="m-auto w-[calc(100%-2rem)] max-w-lg bg-transparent p-0 backdrop:bg-[var(--color-ink)]/75 backdrop:backdrop-blur-sm"
       >
         {active && (
-          <div className="relative border border-[var(--color-line)] bg-[var(--color-paper)] p-8 shadow-2xl">
+          <div className="relative rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--color-paper)] p-8 shadow-2xl">
             <button
               type="button"
               onClick={() => dialogRef.current?.close()}
               aria-label="Закрыть"
-              className="absolute right-4 top-4 grid h-10 w-10 place-items-center border border-[var(--color-line)] bg-white text-xl leading-none text-[var(--color-slate)] hover:text-[var(--color-ink)]"
+              className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-[var(--color-line)] bg-white text-xl leading-none text-[var(--color-slate)] hover:text-[var(--color-ink)]"
             >
               ×
             </button>

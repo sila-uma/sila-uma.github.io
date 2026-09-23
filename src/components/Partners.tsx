@@ -5,7 +5,7 @@ export function Partners() {
         <p className="eyebrow mb-12 text-[var(--color-blue)]">
           При поддержке
         </p>
-        <div className="border-y border-[var(--color-line)] py-8 md:py-10">
+        <div className="overflow-hidden rounded-[1.5rem] border border-[var(--color-line)] bg-white px-4 py-8 md:px-8 md:py-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/partners/partners-strip.png" alt="Организации, при поддержке которых работает технопарк «Сила ума»" className="mx-auto h-auto w-full max-w-6xl object-contain" />
         </div>
