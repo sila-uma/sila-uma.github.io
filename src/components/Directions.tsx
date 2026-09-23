@@ -32,9 +32,8 @@ export function Directions({ directions }: { directions: Direction[] }) {
                 onClick={() => open(d)}
                 className="group relative min-h-[21rem] cursor-pointer overflow-hidden rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--color-paper)] p-6 text-left transition-colors duration-300 hover:border-[var(--color-blue)] hover:bg-[var(--color-blue)] hover:text-white md:p-8"
               >
-                <div className="mb-12 flex items-center justify-between font-[family-name:var(--font-mono)] text-xs font-bold tracking-[0.14em] text-[var(--color-slate)] transition-colors group-hover:text-white/70">
+                <div className="mb-12 font-[family-name:var(--font-mono)] text-xs font-bold tracking-[0.14em] text-[var(--color-slate)] transition-colors group-hover:text-white/70">
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  <span>{d.code}</span>
                 </div>
                 <h3 className="max-w-[15rem] font-[family-name:var(--font-display)] text-[1.75rem] font-bold leading-[1.05] tracking-[-0.04em]">{d.title}</h3>
                 <p className="mt-5 line-clamp-3 text-base leading-relaxed text-[var(--color-slate)] transition-colors group-hover:text-white/75">{d.summary}</p>
@@ -63,7 +62,6 @@ export function Directions({ directions }: { directions: Direction[] }) {
             >
               ×
             </button>
-            <div className="mb-6 font-[family-name:var(--font-mono)] text-xs font-bold tracking-[0.14em] text-[var(--color-slate)]">{active.code}</div>
             <h3 className="mb-4 font-[family-name:var(--font-display)] text-2xl font-bold">{active.title}</h3>
             <div className="space-y-3 text-sm text-[var(--color-slate)] leading-relaxed">
               {paragraphs.map((p, i) => (
