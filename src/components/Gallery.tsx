@@ -1,6 +1,31 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import type { GallerySettings } from "@/lib/content";
 
 export function Gallery({ gallery }: { gallery: GallerySettings }) {
+  const [active, setActive] = useState<number | null>(null);
+  const count = gallery.items.length;
+
+  const showPrevious = () => setActive((current) => current === null ? null : (current - 1 + count) % count);
+  const showNext = () => setActive((current) => current === null ? null : (current + 1) % count);
+
+  useEffect(() => {
+    if (active === null) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActive(null);
+      if (event.key === "ArrowLeft") showPrevious();
+      if (event.key === "ArrowRight") showNext();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [active, count]);
+
   return (
     <section id="gallery" className="bg-[#101426] py-20 text-white md:py-28">
       <div className="section-shell">
@@ -18,22 +43,42 @@ export function Gallery({ gallery }: { gallery: GallerySettings }) {
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 md:auto-rows-[15rem] md:grid-cols-4">
             {gallery.items.map((item, i) => (
-              <figure
+              <button
                 key={i}
-                className={`group relative min-h-64 overflow-hidden rounded-3xl bg-white/10 ${i === 0 ? "md:col-span-2 md:row-span-2" : i === 3 ? "md:col-span-2" : ""}`}
+                type="button"
+                onClick={() => setActive(i)}
+                aria-label={`Открыть фотографию ${i + 1} из ${count}`}
+                className={`group relative min-h-64 cursor-zoom-in overflow-hidden rounded-3xl bg-white/10 ${i === 0 ? "md:col-span-2 md:row-span-2" : i === 3 ? "md:col-span-2" : ""}`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={item.image} alt={item.caption ?? ""} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
-                {item.caption && (
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-5 pb-5 pt-12 text-sm text-white/90">
-                    {item.caption}
-                  </figcaption>
-                )}
-              </figure>
+              </button>
             ))}
           </div>
         )}
       </div>
+
+      {active !== null && count > 0 && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Просмотр фотографий"
+          className="fixed inset-0 z-[100] grid place-items-center bg-[#080a14]/95 p-4 backdrop-blur-sm"
+          onClick={() => setActive(null)}
+        >
+          <button type="button" onClick={() => setActive(null)} aria-label="Закрыть галерею" className="absolute right-4 top-4 grid h-12 w-12 place-items-center rounded-full border border-white/20 bg-white/10 text-3xl text-white transition hover:bg-white/20">×</button>
+          <button type="button" onClick={(event) => { event.stopPropagation(); showPrevious(); }} aria-label="Предыдущая фотография" className="absolute left-3 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-white/10 text-2xl text-white transition hover:bg-white/20 sm:left-6">←</button>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={gallery.items[active].image}
+            alt={gallery.items[active].caption ?? ""}
+            className="max-h-[88vh] max-w-[88vw] rounded-2xl object-contain shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          />
+          <button type="button" onClick={(event) => { event.stopPropagation(); showNext(); }} aria-label="Следующая фотография" className="absolute right-3 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-white/10 text-2xl text-white transition hover:bg-white/20 sm:right-6">→</button>
+          <span className="absolute bottom-5 font-[family-name:var(--font-mono)] text-sm text-white/65">{active + 1} / {count}</span>
+        </div>
+      )}
     </section>
   );
 }

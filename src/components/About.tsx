@@ -19,19 +19,13 @@ export function About({ about }: { about: AboutSettings }) {
             ))}
           </div>
         </div>
-        <div className="grid gap-5 lg:grid-cols-[1.1fr_.9fr]">
-          <div className="rounded-[1.75rem] bg-gradient-to-br from-[var(--color-blue)] to-[var(--color-violet)] p-8 text-white shadow-[0_24px_60px_rgba(54,89,255,.18)] md:p-11">
-            <h3 className="max-w-xl font-[family-name:var(--font-display)] text-3xl font-bold leading-tight tracking-[-0.04em] md:text-4xl">Учимся не только знать, но и создавать</h3>
-            <p className="mt-6 max-w-xl leading-relaxed text-white/75">Программировать, конструировать, моделировать, работать с современным оборудованием и превращать собственные идеи в реальные проекты.</p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+        <div className="grid gap-4 sm:grid-cols-3">
           {about.stats.map((stat) => (
-            <div key={stat.label} className="grid grid-cols-[7rem_1fr] items-baseline gap-4 rounded-3xl border border-[var(--color-line)] bg-white p-6">
+            <div key={stat.label} className="rounded-3xl border border-[var(--color-line)] bg-white p-6">
               <div className="font-[family-name:var(--font-display)] text-3xl font-black text-[var(--color-blue)] md:text-4xl">{stat.value}</div>
-              <div className="text-sm leading-snug text-[var(--color-slate)]">{stat.label}</div>
+              <div className="mt-3 text-sm leading-snug text-[var(--color-slate)]">{stat.label}</div>
             </div>
           ))}
-          </div>
         </div>
       </div>
     </section>

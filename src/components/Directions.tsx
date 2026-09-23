@@ -4,6 +4,24 @@ import { useRef, useState } from "react";
 import type { Direction } from "@/lib/content";
 import { DIRECTION_ICONS } from "./icons";
 
+const CARD_STYLES = [
+  "border-[#dce2ff] bg-[#eef1ff]",
+  "border-[#d1efe3] bg-[#e9f8f2]",
+  "border-[#ffe0c2] bg-[#fff1e4]",
+  "border-[#e5d9ff] bg-[#f3edff]",
+  "border-[#d0eefb] bg-[#e9f8ff]",
+  "border-[#ffd7df] bg-[#ffedf1]",
+];
+
+const ICON_STYLES = [
+  "bg-[#dce2ff] text-[#28326e]",
+  "bg-[#cfeee1] text-[#167a55]",
+  "bg-[#ffdfbd] text-[#a6530b]",
+  "bg-[#e3d7ff] text-[#6543a8]",
+  "bg-[#cceefa] text-[#08769d]",
+  "bg-[#ffd5de] text-[#ad3551]",
+];
+
 export function Directions({ directions }: { directions: Direction[] }) {
   const [active, setActive] = useState<Direction | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -27,17 +45,18 @@ export function Directions({ directions }: { directions: Direction[] }) {
           <p className="max-w-sm text-sm leading-relaxed text-[var(--color-slate)]">Открой карточку, чтобы узнать, чему учатся на каждом направлении и какие проекты можно создать.</p>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {directions.map((d) => {
+          {directions.map((d, index) => {
             const Icon = DIRECTION_ICONS[d.icon] ?? DIRECTION_ICONS.code;
+            const palette = index % CARD_STYLES.length;
             return (
               <button
                 key={d.slug}
                 type="button"
                 onClick={() => open(d)}
-                className="group relative min-h-[19rem] cursor-pointer overflow-hidden rounded-[1.6rem] border border-[var(--color-line)] bg-[var(--color-paper-tint)] p-7 text-left transition duration-300 hover:-translate-y-1.5 hover:bg-white hover:shadow-[0_20px_50px_rgba(34,43,85,.10)]"
+                className={`group relative min-h-[19rem] cursor-pointer overflow-hidden rounded-[1.6rem] border p-7 text-left transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(34,43,85,.10)] ${CARD_STYLES[palette]}`}
               >
                 <div className="mb-10 flex items-center justify-between">
-                  <span className="grid h-14 w-14 place-items-center rounded-2xl bg-[#e8edff] text-[var(--color-blue)] transition-transform group-hover:scale-105">
+                  <span className={`grid h-14 w-14 place-items-center rounded-2xl transition-transform group-hover:scale-105 ${ICON_STYLES[palette]}`}>
                     <Icon className="h-8 w-8" />
                   </span>
                   <span className="font-[family-name:var(--font-mono)] text-xs font-bold tracking-wide text-[#a7adbc]">{d.code}</span>

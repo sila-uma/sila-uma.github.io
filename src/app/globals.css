@@ -71,13 +71,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   letter-spacing: 0.16em;
   line-height: 1.3;
   text-transform: uppercase;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: #eef1ff;
+  color: var(--color-blue);
 }
 
 .eyebrow::before {
   content: "";
-  width: 1.65rem;
-  height: 3px;
-  border-radius: 999px;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
   background: currentColor;
 }
 
