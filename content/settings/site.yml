@@ -6,8 +6,8 @@ hero_subline: >-
   24 августа 2026 года на базе Станции юных техников открылся детский технопарк
   «Сила ума» — шесть направлений подготовки, современное оборудование и
   методическая поддержка РГПУ им. А. И. Герцена.
-hero_cta_label: Оставить заявку
-hero_cta_target: form
+hero_cta_label: Контакты
+hero_cta_target: contacts
 sections:
   - id: hero
     visible: true
@@ -28,4 +28,4 @@ sections:
   - id: contacts
     visible: true
   - id: form
-    visible: true
+    visible: false

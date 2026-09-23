@@ -18,7 +18,6 @@ export function Directions({ directions }: { directions: Direction[] }) {
 
   return (
     <section id="directions" className="relative overflow-hidden bg-[var(--color-paper)] py-20 md:py-28">
-      <div className="dot-grid absolute inset-y-0 right-0 w-1/3 opacity-50" aria-hidden />
       <div className="section-shell relative">
         <p className="eyebrow mb-4 text-[var(--color-blue)]">
           Направления работы
@@ -28,23 +27,22 @@ export function Directions({ directions }: { directions: Direction[] }) {
           <p className="max-w-sm text-sm leading-relaxed text-[var(--color-slate)]">Открой карточку, чтобы узнать, чему учатся на каждом направлении и какие проекты можно создать.</p>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {directions.map((d, index) => {
+          {directions.map((d) => {
             const Icon = DIRECTION_ICONS[d.icon] ?? DIRECTION_ICONS.code;
             return (
               <button
                 key={d.slug}
                 type="button"
                 onClick={() => open(d)}
-                className="soft-panel group relative cursor-pointer overflow-hidden rounded-[1.75rem] p-6 text-left transition duration-300 hover:-translate-y-2 hover:border-transparent hover:shadow-[0_24px_60px_rgba(36,107,253,.16)]"
+                className="soft-panel group relative cursor-pointer overflow-hidden p-7 text-left transition duration-300 hover:border-[var(--color-blue)]"
               >
-                <span className={`absolute inset-x-0 top-0 h-1.5 ${index % 3 === 0 ? "bg-[var(--color-red)]" : index % 3 === 1 ? "bg-[var(--color-cyan)]" : "bg-[var(--color-amber)]"}`} />
                 <div className="mb-10 flex items-center justify-between">
-                  <span className={`grid h-14 w-14 place-items-center rounded-2xl ${index % 3 === 0 ? "bg-[var(--color-red)]/10 text-[var(--color-red)]" : index % 3 === 1 ? "bg-[var(--color-blue)]/10 text-[var(--color-blue)]" : "bg-[var(--color-amber)]/20 text-[var(--color-ink)]"}`}>
+                  <span className="grid h-14 w-14 place-items-center border border-[var(--color-line)] bg-[var(--color-paper-tint)] text-[var(--color-blue)]">
                     <Icon className="h-8 w-8" />
                   </span>
-                  <span className="rounded-full border border-[var(--color-line)] px-3 py-1 font-[family-name:var(--font-mono)] text-[11px] tracking-wide text-[var(--color-slate)]">{d.code}</span>
+                  <span className="border border-[var(--color-line)] px-3 py-1 font-[family-name:var(--font-mono)] text-[11px] tracking-wide text-[var(--color-slate)]">{d.code}</span>
                 </div>
-                <h3 className="mb-3 font-[family-name:var(--font-display)] text-lg font-bold leading-tight">{d.title}</h3>
+                <h3 className="mb-3 font-[family-name:var(--font-display)] text-lg font-semibold leading-tight">{d.title}</h3>
                 <p className="text-sm leading-relaxed text-[var(--color-slate)]">{d.summary}</p>
                 <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--color-blue)]">Подробнее <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span></span>
               </button>
@@ -61,18 +59,18 @@ export function Directions({ directions }: { directions: Direction[] }) {
         className="m-auto w-[calc(100%-2rem)] max-w-lg bg-transparent p-0 backdrop:bg-[var(--color-ink)]/75 backdrop:backdrop-blur-sm"
       >
         {active && (
-          <div className="relative rounded-[2rem] border border-[var(--color-line)] bg-[var(--color-paper)] p-8 shadow-2xl">
+          <div className="relative border border-[var(--color-line)] bg-[var(--color-paper)] p-8 shadow-2xl">
             <button
               type="button"
               onClick={() => dialogRef.current?.close()}
               aria-label="Закрыть"
-              className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-[var(--color-paper-tint)] text-xl leading-none text-[var(--color-slate)] hover:text-[var(--color-ink)]"
+              className="absolute right-4 top-4 grid h-10 w-10 place-items-center border border-[var(--color-line)] bg-white text-xl leading-none text-[var(--color-slate)] hover:text-[var(--color-ink)]"
             >
               ×
             </button>
             <div className="flex items-center gap-4 mb-6">
-              {ActiveIcon && <span className="grid h-14 w-14 place-items-center rounded-2xl bg-[var(--color-blue)] text-white"><ActiveIcon className="h-8 w-8" /></span>}
-              <span className="font-[family-name:var(--font-mono)] text-[11px] tracking-wide text-[var(--color-slate)] border border-[var(--color-line)] rounded-full px-2 py-1">
+              {ActiveIcon && <span className="grid h-14 w-14 place-items-center bg-[var(--color-blue)] text-white"><ActiveIcon className="h-8 w-8" /></span>}
+              <span className="border border-[var(--color-line)] px-2 py-1 font-[family-name:var(--font-mono)] text-[11px] tracking-wide text-[var(--color-slate)]">
                 {active.code}
               </span>
             </div>

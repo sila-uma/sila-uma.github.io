@@ -4,7 +4,7 @@ export function Partners({ partners }: { partners: Partner[] }) {
   return (
     <section id="partners" className="bg-[var(--color-paper-tint)] py-20 md:py-28">
       <div className="section-shell">
-        <p className="eyebrow mb-4 text-[var(--color-red)]">
+        <p className="eyebrow mb-4 text-[var(--color-blue)]">
           Партнёры
         </p>
         <h2 className="section-title mb-12 max-w-3xl">
@@ -17,7 +17,7 @@ export function Partners({ partners }: { partners: Partner[] }) {
               href={p.url}
               target="_blank"
               rel="noreferrer"
-              className="soft-panel group flex flex-col items-center rounded-[1.5rem] p-6 text-center transition duration-300 hover:-translate-y-1 hover:border-[var(--color-cyan)]"
+              className="soft-panel group flex flex-col items-center p-6 text-center transition duration-300 hover:border-[var(--color-blue)]"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={p.logo} alt={p.title} className="mb-5 h-16 w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-105" />

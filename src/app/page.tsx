@@ -46,9 +46,7 @@ export default function Home() {
         {show("partners") && partners.length > 0 && <Partners partners={partners} />}
         {show("enrollment", enrollment.visible) && <SimpleSection id="enrollment" data={enrollment} />}
         {show("documents", documents.visible) && <SimpleSection id="documents" data={documents} />}
-        {(show("contacts", contacts.visible) || show("form")) && (
-          <Contacts contacts={contacts} directions={directions} />
-        )}
+        {show("contacts", contacts.visible) && <Contacts contacts={contacts} />}
       </main>
       <Footer siteTitle={site.title} />
     </>
