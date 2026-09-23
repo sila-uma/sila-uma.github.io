@@ -9,3 +9,11 @@ items:
     caption: Учебное пространство технопарка
   - image: /images/gallery/robotics-project.jpg
     caption: Работа над проектом по робототехнике
+  - image: /images/gallery/classroom-screen.jpg
+    caption: Учебный класс технопарка
+  - image: /images/gallery/fabrication-lab.jpg
+    caption: Оборудование лаборатории цифрового производства
+  - image: /images/gallery/workshop-visit.jpg
+    caption: Знакомство с лазерным оборудованием
+  - image: /images/gallery/computer-room.jpg
+    caption: Компьютерный класс технопарка

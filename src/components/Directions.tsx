@@ -2,25 +2,15 @@
 
 import { useRef, useState } from "react";
 import type { Direction } from "@/lib/content";
-import { DIRECTION_ICONS } from "./icons";
 
-const CARD_STYLES = [
-  "border-[#dce2ff] bg-[#eef1ff]",
-  "border-[#d1efe3] bg-[#e9f8f2]",
-  "border-[#ffe0c2] bg-[#fff1e4]",
-  "border-[#e5d9ff] bg-[#f3edff]",
-  "border-[#d0eefb] bg-[#e9f8ff]",
-  "border-[#ffd7df] bg-[#ffedf1]",
-];
-
-const ICON_STYLES = [
-  "bg-[#dce2ff] text-[#28326e]",
-  "bg-[#cfeee1] text-[#167a55]",
-  "bg-[#ffdfbd] text-[#a6530b]",
-  "bg-[#e3d7ff] text-[#6543a8]",
-  "bg-[#cceefa] text-[#08769d]",
-  "bg-[#ffd5de] text-[#ad3551]",
-];
+const DIRECTION_IMAGES: Record<string, string> = {
+  robototehnika: "/images/gallery/robotics-project.jpg",
+  aviakvant: "/images/gallery/equipment-tour.jpg",
+  promdizain: "/images/gallery/fabrication-lab.jpg",
+  "lazernye-tehnologii": "/images/gallery/workshop-visit.jpg",
+  it: "/images/gallery/computer-room.jpg",
+  mediaproizvodstvo: "/images/gallery/classroom-screen.jpg",
+};
 
 export function Directions({ directions }: { directions: Direction[] }) {
   const [active, setActive] = useState<Direction | null>(null);
@@ -31,7 +21,6 @@ export function Directions({ directions }: { directions: Direction[] }) {
     dialogRef.current?.showModal();
   }
 
-  const ActiveIcon = active ? (DIRECTION_ICONS[active.icon] ?? DIRECTION_ICONS.code) : null;
   const paragraphs = active ? active.body.split("\n\n").map((p) => p.trim()).filter(Boolean) : [];
 
   return (
@@ -44,29 +33,31 @@ export function Directions({ directions }: { directions: Direction[] }) {
           <h2 className="section-title max-w-2xl">Выбери то, что интересно тебе</h2>
           <p className="max-w-sm text-sm leading-relaxed text-[var(--color-slate)]">Открой карточку, чтобы узнать, чему учатся на каждом направлении и какие проекты можно создать.</p>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {directions.map((d, index) => {
-            const Icon = DIRECTION_ICONS[d.icon] ?? DIRECTION_ICONS.code;
-            const palette = index % CARD_STYLES.length;
-            return (
+        <div className="grid gap-x-8 gap-y-14 md:grid-cols-2">
+          {directions.map((d, index) => (
               <button
                 key={d.slug}
                 type="button"
                 onClick={() => open(d)}
-                className={`group relative min-h-[19rem] cursor-pointer overflow-hidden rounded-[1.6rem] border p-7 text-left transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(34,43,85,.10)] ${CARD_STYLES[palette]}`}
+                className="group cursor-pointer border-t border-[var(--color-ink)] pt-4 text-left"
               >
-                <div className="mb-10 flex items-center justify-between">
-                  <span className={`grid h-14 w-14 place-items-center rounded-2xl transition-transform group-hover:scale-105 ${ICON_STYLES[palette]}`}>
-                    <Icon className="h-8 w-8" />
-                  </span>
-                  <span className="font-[family-name:var(--font-mono)] text-xs font-bold tracking-wide text-[#a7adbc]">{d.code}</span>
+                <div className="mb-5 flex items-center justify-between">
+                  <span className="font-[family-name:var(--font-mono)] text-xs font-bold tracking-[0.14em] text-[var(--color-slate)]">0{index + 1}</span>
+                  <span className="font-[family-name:var(--font-mono)] text-xs font-bold tracking-[0.14em] text-[var(--color-slate)]">{d.code}</span>
                 </div>
-                <h3 className="mb-3 font-[family-name:var(--font-display)] text-xl font-bold leading-tight">{d.title}</h3>
-                <p className="text-sm leading-relaxed text-[var(--color-slate)]">{d.summary}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--color-blue)]">Подробнее <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span></span>
+                <div className="mb-6 aspect-[16/10] overflow-hidden bg-[var(--color-paper-tint)]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={DIRECTION_IMAGES[d.slug]} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]" />
+                </div>
+                <div className="grid gap-4 sm:grid-cols-[1fr_1.15fr]">
+                  <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold leading-[1.05] tracking-[-0.035em]">{d.title}</h3>
+                  <div>
+                    <p className="text-base leading-relaxed text-[var(--color-slate)]">{d.summary}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[var(--color-blue)]">Подробнее <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span></span>
+                  </div>
+                </div>
               </button>
-            );
-          })}
+          ))}
         </div>
       </div>
 
@@ -87,12 +78,7 @@ export function Directions({ directions }: { directions: Direction[] }) {
             >
               ×
             </button>
-            <div className="flex items-center gap-4 mb-6">
-              {ActiveIcon && <span className="grid h-14 w-14 place-items-center bg-[var(--color-blue)] text-white"><ActiveIcon className="h-8 w-8" /></span>}
-              <span className="border border-[var(--color-line)] px-2 py-1 font-[family-name:var(--font-mono)] text-[11px] tracking-wide text-[var(--color-slate)]">
-                {active.code}
-              </span>
-            </div>
+            <div className="mb-6 font-[family-name:var(--font-mono)] text-xs font-bold tracking-[0.14em] text-[var(--color-slate)]">{active.code}</div>
             <h3 className="mb-4 font-[family-name:var(--font-display)] text-2xl font-bold">{active.title}</h3>
             <div className="space-y-3 text-sm text-[var(--color-slate)] leading-relaxed">
               {paragraphs.map((p, i) => (

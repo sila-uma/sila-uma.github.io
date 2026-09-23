@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
-import { Unbounded, Golos_Text, JetBrains_Mono } from "next/font/google";
+import { Golos_Text, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { getSiteSettings } from "@/lib/content";
-
-const unbounded = Unbounded({
-  subsets: ["latin", "cyrillic"],
-  weight: ["500", "700", "900"],
-  variable: "--font-unbounded",
-  display: "swap",
-});
 
 const golos = Golos_Text({
   subsets: ["latin", "cyrillic"],
@@ -34,7 +27,7 @@ export function generateMetadata(): Metadata {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
-      <body className={`${unbounded.variable} ${golos.variable} ${jetbrainsMono.variable} antialiased`}>
+      <body className={`${golos.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>
     </html>

@@ -43,7 +43,7 @@ export default function Home() {
         {show("directions") && directions.length > 0 && <Directions directions={directions} />}
         {show("gallery", gallery.visible) && <Gallery gallery={gallery} />}
         {show("news") && <News news={news} />}
-        {show("partners") && partners.length > 0 && <Partners partners={partners} />}
+        {show("partners") && partners.length > 0 && <Partners />}
         {show("enrollment", enrollment.visible) && <SimpleSection id="enrollment" data={enrollment} />}
         {show("documents", documents.visible) && <SimpleSection id="documents" data={documents} />}
         {show("contacts", contacts.visible) && <Contacts contacts={contacts} />}
