@@ -6,8 +6,8 @@ export function Hero({ site }: { site: SiteSettings; directions: Direction[] }) 
       <div className="section-shell grid min-h-[calc(100svh-4.9rem)] items-center gap-14 py-16 lg:grid-cols-[1.03fr_.97fr] lg:py-20">
         <div className="animate-in relative z-10">
           <p className="mb-6 inline-flex rounded-full bg-[#eef1ff] px-4 py-2 text-sm font-bold text-[var(--color-blue)]">✦ {site.hero_kicker}</p>
-          <h1 className="max-w-3xl font-[family-name:var(--font-display)] text-[clamp(3.7rem,8vw,6.8rem)] font-black uppercase leading-[0.88] tracking-[-0.075em]">
-            {site.hero_headline.split(" ")[0]}<br />
+          <h1 className="max-w-3xl whitespace-nowrap font-[family-name:var(--font-display)] text-[clamp(2.35rem,12vw,5rem)] font-black uppercase leading-[0.92] tracking-[-0.075em] lg:text-[clamp(3rem,6vw,5.2rem)]">
+            {site.hero_headline.split(" ")[0]}{" "}
             <span className="bg-gradient-to-r from-[var(--color-blue)] to-[var(--color-violet)] bg-clip-text text-transparent">{site.hero_headline.split(" ").slice(1).join(" ")}</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--color-slate)] md:text-xl">{site.hero_subline}</p>

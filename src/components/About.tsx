@@ -19,7 +19,7 @@ export function About({ about }: { about: AboutSettings }) {
             ))}
           </div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2">
           {about.stats.map((stat) => (
             <div key={stat.label} className="rounded-3xl border border-[var(--color-line)] bg-white p-6">
               <div className="font-[family-name:var(--font-display)] text-3xl font-black text-[var(--color-blue)] md:text-4xl">{stat.value}</div>

@@ -2,15 +2,15 @@ import type { ContactsSettings } from "@/lib/content";
 
 export function Contacts({ contacts }: { contacts: ContactsSettings }) {
   return (
-    <section id="contacts" className="bg-[var(--color-paper-tint)] py-20 text-white md:py-28">
+    <section id="contacts" className="bg-[var(--color-paper-tint)] py-14 text-white md:py-20">
       <div className="section-shell grid overflow-hidden rounded-[2rem] bg-gradient-to-br from-[var(--color-blue)] to-[var(--color-violet)] shadow-[0_30px_70px_rgba(54,89,255,.18)] md:grid-cols-[1.1fr_.9fr]">
-        <div className="p-8 md:p-12 lg:p-14">
+        <div className="p-7 md:p-10">
           <p className="eyebrow mb-5 text-white">
             {contacts.title}
           </p>
-          <h2 className="section-title">Приходите в «Силу ума»</h2>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75">Чтобы узнать подробности о программах, расписании и наборе групп, свяжитесь с технопарком.</p>
-          <dl className="mt-8 space-y-3 text-sm">
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold leading-tight tracking-[-0.04em] md:text-4xl">Приходите в технопарк «Сила ума»</h2>
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75">Чтобы узнать подробности о программах, расписании и наборе групп, свяжитесь с технопарком.</p>
+          <dl className="mt-6 space-y-3 text-sm">
             <div className="flex gap-3">
               <dt className="w-20 text-white/55">Адрес</dt>
               <dd className="max-w-md font-semibold">{contacts.address}</dd>
@@ -48,11 +48,18 @@ export function Contacts({ contacts }: { contacts: ContactsSettings }) {
           </dl>
           {contacts.note && <p className="mt-8 max-w-xl text-xs leading-relaxed text-white/50">{contacts.note}</p>}
         </div>
-        <div className="grid min-h-[22rem] place-items-center bg-[linear-gradient(rgba(15,20,45,.10),rgba(15,20,45,.10)),repeating-linear-gradient(45deg,rgba(255,255,255,.08)_0,rgba(255,255,255,.08)_1px,transparent_1px,transparent_20px)] p-8 text-center">
-          <div>
-            <strong className="block text-3xl">Цхинвал</strong>
-            <span className="mt-2 block text-sm text-white/65">Республиканская станция юных техников</span>
-          </div>
+        <div className="min-h-[19rem] bg-white/10">
+          {contacts.map_embed ? (
+            <iframe
+              src={contacts.map_embed}
+              title="Технопарк «Сила ума» на карте"
+              loading="lazy"
+              allowFullScreen
+              className="h-full min-h-[19rem] w-full border-0"
+            />
+          ) : (
+            <div className="grid h-full min-h-[19rem] place-items-center text-center">Цхинвал</div>
+          )}
         </div>
       </div>
     </section>
