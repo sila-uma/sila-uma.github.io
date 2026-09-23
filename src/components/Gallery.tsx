@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import type { GallerySettings } from "@/lib/content";
 
 export function Gallery({ gallery }: { gallery: GallerySettings }) {
+  const [current, setCurrent] = useState(0);
   const [active, setActive] = useState<number | null>(null);
   const count = gallery.items.length;
 
   const showPrevious = () => setActive((current) => current === null ? null : (current - 1 + count) % count);
   const showNext = () => setActive((current) => current === null ? null : (current + 1) % count);
+  const previousSlide = () => setCurrent((index) => (index - 1 + count) % count);
+  const nextSlide = () => setCurrent((index) => (index + 1) % count);
 
   useEffect(() => {
     if (active === null) return;
@@ -41,19 +44,23 @@ export function Gallery({ gallery }: { gallery: GallerySettings }) {
             Здесь появятся фотографии занятий, проектов и событий технопарка.
           </div>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 md:auto-rows-[15rem] md:grid-cols-4">
-            {gallery.items.map((item, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setActive(i)}
-                aria-label={`Открыть фотографию ${i + 1} из ${count}`}
-                className={`group relative min-h-64 cursor-zoom-in overflow-hidden rounded-3xl bg-white/10 ${i === 0 ? "md:col-span-2 md:row-span-2" : i === 3 ? "md:col-span-2" : ""}`}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.image} alt={item.caption ?? ""} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
-              </button>
-            ))}
+          <div>
+            <button
+              type="button"
+              onClick={() => setActive(current)}
+              aria-label={`Открыть фотографию ${current + 1} из ${count}`}
+              className="group relative block aspect-[16/10] w-full cursor-zoom-in overflow-hidden bg-white/10 md:aspect-[16/8]"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={gallery.items[current].image} alt={gallery.items[current].caption ?? ""} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.015]" />
+            </button>
+            <div className="mt-5 flex items-center justify-between border-t border-white/20 pt-5">
+              <span className="font-[family-name:var(--font-mono)] text-sm text-white/60">{String(current + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}</span>
+              <div className="flex gap-2">
+                <button type="button" onClick={previousSlide} aria-label="Предыдущая фотография" className="grid h-12 w-12 place-items-center border border-white/25 text-xl transition hover:border-white hover:bg-white hover:text-[#101426]">←</button>
+                <button type="button" onClick={nextSlide} aria-label="Следующая фотография" className="grid h-12 w-12 place-items-center border border-white/25 text-xl transition hover:border-white hover:bg-white hover:text-[#101426]">→</button>
+              </div>
+            </div>
           </div>
         )}
       </div>

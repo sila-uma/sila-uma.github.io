@@ -26,7 +26,7 @@ export function Hero({ site }: { site: SiteSettings; directions: Direction[] }) 
         <div className="animate-in relative min-h-[28rem] sm:min-h-[33rem]" style={{ animationDelay: "0.12s" }}>
           <div className="absolute inset-3 overflow-hidden rounded-[2.25rem] bg-[#dfe4ef] shadow-[0_35px_70px_rgba(30,39,80,.17)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80" alt="Занятия в детском технопарке" className="h-full w-full object-cover" />
+            <img src="/images/gallery/fabrication-lab.jpg" alt="Мастерская технопарка «Сила ума»" className="h-full w-full object-cover" />
           </div>
           <div className="absolute -left-2 bottom-12 rounded-2xl bg-white/95 px-5 py-4 shadow-[0_20px_45px_rgba(30,39,80,.14)] backdrop-blur">
             <strong className="block text-lg">Создавай</strong><span className="text-sm text-[var(--color-slate)]">свои первые проекты</span>
