@@ -39,10 +39,10 @@ export default function Home() {
       <Header sections={site.sections} siteTitle={site.title} />
       <main>
         {show("hero") && <Hero site={site} directions={directions} />}
-        {show("directions") && directions.length > 0 && <Directions directions={directions} />}
         {show("about", about.visible) && <About about={about} />}
-        {show("news") && <News news={news} />}
+        {show("directions") && directions.length > 0 && <Directions directions={directions} />}
         {show("gallery", gallery.visible) && <Gallery gallery={gallery} />}
+        {show("news") && <News news={news} />}
         {show("partners") && partners.length > 0 && <Partners partners={partners} />}
         {show("enrollment", enrollment.visible) && <SimpleSection id="enrollment" data={enrollment} />}
         {show("documents", documents.visible) && <SimpleSection id="documents" data={documents} />}
