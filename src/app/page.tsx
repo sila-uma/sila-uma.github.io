@@ -36,7 +36,7 @@ export default function Home() {
 
   return (
     <>
-      <Header sections={site.sections} siteTitle={site.title} />
+      <Header sections={site.sections} />
       <main>
         {show("hero") && <Hero site={site} directions={directions} />}
         {show("about", about.visible) && <About about={about} />}

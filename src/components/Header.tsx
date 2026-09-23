@@ -15,7 +15,7 @@ const LABELS: Record<string, string> = {
   contacts: "Контакты",
 };
 
-export function Header({ sections, siteTitle }: { sections: Section[]; siteTitle: string }) {
+export function Header({ sections }: { sections: Section[] }) {
   const [open, setOpen] = useState(false);
   const items = sections.filter((s) => s.id !== "hero" && s.id !== "form" && s.visible && LABELS[s.id]);
   const close = () => setOpen(false);
@@ -27,9 +27,6 @@ export function Header({ sections, siteTitle }: { sections: Section[]; siteTitle
           <span className="grid h-12 w-[5.3rem] shrink-0 place-items-center sm:w-[6.2rem]">
             <Image src="/images/brand-logo.png" alt="Логотип технопарка «Сила ума»" width={1572} height={1001} className="h-full w-full object-contain" priority />
           </span>
-          <span className="hidden truncate font-[family-name:var(--font-display)] text-sm font-bold tracking-[-0.03em] xl:block">
-            {siteTitle}
-          </span>
         </a>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Основная навигация">
@@ -40,16 +37,7 @@ export function Header({ sections, siteTitle }: { sections: Section[]; siteTitle
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <label className="sr-only" htmlFor="site-language">Язык сайта</label>
-          <select
-            id="site-language"
-            defaultValue="ru"
-            title="Русский язык"
-            className="h-10 cursor-pointer rounded-xl border border-[var(--color-line)] bg-white px-3 text-sm font-bold text-[var(--color-ink)] focus:border-[var(--color-blue)]"
-          >
-            <option value="ru">Рус</option>
-          </select>
+        <div className="flex items-center gap-2 lg:hidden">
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}

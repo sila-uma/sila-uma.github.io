@@ -22,7 +22,7 @@ export default async function NewsArticle({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <Header sections={site.sections} siteTitle={site.title} />
+      <Header sections={site.sections} />
       <main className="mx-auto max-w-2xl px-5 py-20">
         <Link
           href="/#news"
