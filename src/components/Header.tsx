@@ -21,10 +21,10 @@ export function Header({ sections, siteTitle }: { sections: Section[]; siteTitle
   const close = () => setOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--color-line)] bg-white/95 backdrop-blur-xl">
-      <div className="section-shell flex h-[5rem] items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 border-b border-[var(--color-line)]/80 bg-white/90 backdrop-blur-xl">
+      <div className="section-shell flex h-[4.9rem] items-center justify-between gap-4">
         <a href="#hero" onClick={close} className="flex min-w-0 items-center gap-3">
-          <span className="grid h-12 w-[5.2rem] shrink-0 place-items-center sm:w-[6rem]">
+          <span className="grid h-12 w-[5.3rem] shrink-0 place-items-center sm:w-[6.2rem]">
             <Image src="/images/brand-logo.png" alt="Логотип технопарка «Сила ума»" width={1572} height={1001} className="h-full w-full object-contain" priority />
           </span>
           <span className="hidden truncate font-[family-name:var(--font-display)] text-sm font-bold tracking-[-0.03em] xl:block">
@@ -34,7 +34,7 @@ export function Header({ sections, siteTitle }: { sections: Section[]; siteTitle
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Основная навигация">
           {items.map((s) => (
-            <a key={s.id} href={`#${s.id}`} className="text-sm font-medium text-[var(--color-ink)] transition-colors hover:text-[var(--color-blue)]">
+            <a key={s.id} href={`#${s.id}`} className="text-sm font-semibold text-[var(--color-slate)] transition-colors hover:text-[var(--color-blue)]">
               {LABELS[s.id]}
             </a>
           ))}
@@ -47,7 +47,7 @@ export function Header({ sections, siteTitle }: { sections: Section[]; siteTitle
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
-            className="grid h-11 w-11 place-items-center border border-[var(--color-line)] bg-white"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--color-line)] bg-white"
           >
             <span className="relative block h-4 w-5" aria-hidden>
               <span className={`absolute left-0 top-0 h-0.5 w-5 bg-[var(--color-ink)] transition ${open ? "translate-y-[7px] rotate-45" : ""}`} />

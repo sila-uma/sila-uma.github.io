@@ -17,13 +17,13 @@ export function Directions({ directions }: { directions: Direction[] }) {
   const paragraphs = active ? active.body.split("\n\n").map((p) => p.trim()).filter(Boolean) : [];
 
   return (
-    <section id="directions" className="relative overflow-hidden bg-[var(--color-paper)] py-20 md:py-28">
+    <section id="directions" className="relative overflow-hidden bg-white py-20 md:py-28">
       <div className="section-shell relative">
         <p className="eyebrow mb-4 text-[var(--color-blue)]">
           Направления работы
         </p>
         <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <h2 className="section-title max-w-2xl">Найди своё направление</h2>
+          <h2 className="section-title max-w-2xl">Выбери то, что интересно тебе</h2>
           <p className="max-w-sm text-sm leading-relaxed text-[var(--color-slate)]">Открой карточку, чтобы узнать, чему учатся на каждом направлении и какие проекты можно создать.</p>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -34,15 +34,15 @@ export function Directions({ directions }: { directions: Direction[] }) {
                 key={d.slug}
                 type="button"
                 onClick={() => open(d)}
-                className="soft-panel group relative cursor-pointer overflow-hidden p-7 text-left transition duration-300 hover:border-[var(--color-blue)]"
+                className="group relative min-h-[19rem] cursor-pointer overflow-hidden rounded-[1.6rem] border border-[var(--color-line)] bg-[var(--color-paper-tint)] p-7 text-left transition duration-300 hover:-translate-y-1.5 hover:bg-white hover:shadow-[0_20px_50px_rgba(34,43,85,.10)]"
               >
                 <div className="mb-10 flex items-center justify-between">
-                  <span className="grid h-14 w-14 place-items-center border border-[var(--color-line)] bg-[var(--color-paper-tint)] text-[var(--color-blue)]">
+                  <span className="grid h-14 w-14 place-items-center rounded-2xl bg-[#e8edff] text-[var(--color-blue)] transition-transform group-hover:scale-105">
                     <Icon className="h-8 w-8" />
                   </span>
-                  <span className="border border-[var(--color-line)] px-3 py-1 font-[family-name:var(--font-mono)] text-[11px] tracking-wide text-[var(--color-slate)]">{d.code}</span>
+                  <span className="font-[family-name:var(--font-mono)] text-xs font-bold tracking-wide text-[#a7adbc]">{d.code}</span>
                 </div>
-                <h3 className="mb-3 font-[family-name:var(--font-display)] text-lg font-semibold leading-tight">{d.title}</h3>
+                <h3 className="mb-3 font-[family-name:var(--font-display)] text-xl font-bold leading-tight">{d.title}</h3>
                 <p className="text-sm leading-relaxed text-[var(--color-slate)]">{d.summary}</p>
                 <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--color-blue)]">Подробнее <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span></span>
               </button>

@@ -2,34 +2,38 @@ import type { SiteSettings, Direction } from "@/lib/content";
 
 export function Hero({ site }: { site: SiteSettings; directions: Direction[] }) {
   return (
-    <section id="hero" className="blueprint-grid relative overflow-hidden border-b border-[var(--color-line)] bg-white text-[var(--color-ink)]">
-      <div className="section-shell grid min-h-[calc(92svh-5rem)] items-center gap-12 py-16 lg:grid-cols-[1fr_.72fr] lg:py-24">
+    <section id="hero" className="hero-glow relative overflow-hidden text-[var(--color-ink)]">
+      <div className="section-shell grid min-h-[calc(100svh-4.9rem)] items-center gap-14 py-16 lg:grid-cols-[1.03fr_.97fr] lg:py-20">
         <div className="animate-in relative z-10">
-          <p className="eyebrow mb-7 text-[var(--color-blue)]">{site.hero_kicker}</p>
-          <h1 className="max-w-3xl font-[family-name:var(--font-display)] text-[clamp(3.2rem,8vw,7rem)] font-bold leading-[0.92] tracking-[-0.07em]">
-            {site.hero_headline}
-            <span className="text-[var(--color-blue)]">.</span>
+          <p className="mb-6 inline-flex rounded-full bg-[#eef1ff] px-4 py-2 text-sm font-bold text-[var(--color-blue)]">✦ {site.hero_kicker}</p>
+          <h1 className="max-w-3xl font-[family-name:var(--font-display)] text-[clamp(3.7rem,8vw,6.8rem)] font-black uppercase leading-[0.88] tracking-[-0.075em]">
+            {site.hero_headline.split(" ")[0]}<br />
+            <span className="bg-gradient-to-r from-[var(--color-blue)] to-[var(--color-violet)] bg-clip-text text-transparent">{site.hero_headline.split(" ").slice(1).join(" ")}</span>
           </h1>
-          <p className="mt-8 max-w-2xl text-base leading-relaxed text-[var(--color-slate)] md:text-lg">{site.hero_subline}</p>
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--color-slate)] md:text-xl">{site.hero_subline}</p>
 
           <div className="mt-10 flex flex-wrap gap-3">
-            <a href={`#${site.hero_cta_target}`} className="group inline-flex items-center gap-3 bg-[var(--color-blue)] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[var(--color-ink)]">
+            <a href={`#${site.hero_cta_target}`} className="group inline-flex items-center gap-3 rounded-2xl bg-[var(--color-blue)] px-7 py-4 text-sm font-bold text-white shadow-[0_14px_35px_rgba(54,89,255,.22)] transition hover:-translate-y-0.5 hover:bg-[var(--color-violet)]">
               {site.hero_cta_label}
               <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
             </a>
-            <a href="#directions" className="inline-flex items-center border border-[var(--color-line)] bg-white px-7 py-4 text-sm font-semibold text-[var(--color-ink)] transition hover:border-[var(--color-blue)] hover:text-[var(--color-blue)]">
-              Выбрать направление
+            <a href="#about" className="inline-flex items-center rounded-2xl border border-[var(--color-line)] bg-white px-7 py-4 text-sm font-bold text-[var(--color-ink)] transition hover:border-[var(--color-blue)] hover:text-[var(--color-blue)]">
+              О технопарке
             </a>
           </div>
         </div>
 
-        <div className="animate-in border-l border-[var(--color-line)] pl-7 md:pl-10" style={{ animationDelay: "0.12s" }}>
-          <p className="mb-8 font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.16em] text-[var(--color-slate)]">Технопарк в цифрах</p>
-          <dl className="divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
-            <div className="grid grid-cols-[6rem_1fr] items-baseline gap-5 py-7"><dt className="font-[family-name:var(--font-display)] text-4xl font-bold text-[var(--color-blue)]">6</dt><dd className="text-sm text-[var(--color-slate)]">образовательных направлений</dd></div>
-            <div className="grid grid-cols-[6rem_1fr] items-baseline gap-5 py-7"><dt className="font-[family-name:var(--font-display)] text-4xl font-bold">880</dt><dd className="text-sm text-[var(--color-slate)]">единиц современного оборудования</dd></div>
-            <div className="grid grid-cols-[6rem_1fr] items-baseline gap-5 py-7"><dt className="font-[family-name:var(--font-display)] text-4xl font-bold">2026</dt><dd className="text-sm text-[var(--color-slate)]">год открытия технопарка</dd></div>
-          </dl>
+        <div className="animate-in relative min-h-[28rem] sm:min-h-[33rem]" style={{ animationDelay: "0.12s" }}>
+          <div className="absolute inset-3 overflow-hidden rounded-[2.25rem] bg-[#dfe4ef] shadow-[0_35px_70px_rgba(30,39,80,.17)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80" alt="Занятия в детском технопарке" className="h-full w-full object-cover" />
+          </div>
+          <div className="absolute -left-2 bottom-12 rounded-2xl bg-white/95 px-5 py-4 shadow-[0_20px_45px_rgba(30,39,80,.14)] backdrop-blur">
+            <strong className="block text-lg">Создавай</strong><span className="text-sm text-[var(--color-slate)]">свои первые проекты</span>
+          </div>
+          <div className="absolute -right-2 top-14 rounded-2xl bg-white/95 px-5 py-4 shadow-[0_20px_45px_rgba(30,39,80,.14)] backdrop-blur">
+            <strong className="block text-lg">Исследуй</strong><span className="text-sm text-[var(--color-slate)]">мир технологий</span>
+          </div>
         </div>
       </div>
     </section>
