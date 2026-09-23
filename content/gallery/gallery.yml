@@ -1,3 +1,11 @@
 visible: true
 title: Фотогалерея
-items: []
+items:
+  - image: /images/gallery/opening-ceremony.jpg
+    caption: Торжественное открытие технопарка «Сила ума»
+  - image: /images/gallery/equipment-tour.jpg
+    caption: Знакомство с оборудованием технопарка
+  - image: /images/gallery/computer-class.jpg
+    caption: Учебное пространство технопарка
+  - image: /images/gallery/robotics-project.jpg
+    caption: Работа над проектом по робототехнике

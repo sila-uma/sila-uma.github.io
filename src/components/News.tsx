@@ -13,7 +13,7 @@ export function News({ news }: { news: NewsItem[] }) {
           События
         </p>
         <h2 className="section-title mb-12 max-w-3xl">
-          Что происходит в технопарке
+          Новости
         </h2>
         {news.length === 0 ? (
           <p className="text-[var(--color-slate)]">Новости появятся здесь после первой публикации.</p>

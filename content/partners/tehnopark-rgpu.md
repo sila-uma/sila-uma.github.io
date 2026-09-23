@@ -1,7 +1,7 @@
 ---
 title: Технопарк РГПУ им. А. И. Герцена
 order: 2
-visible: true
+visible: false
 logo: /images/partners/tehnopark-rgpu.svg
 url: https://technopark.herzen.spb.ru/
 ---
