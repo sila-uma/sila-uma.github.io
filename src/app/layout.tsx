@@ -27,6 +27,7 @@ export function generateMetadata(): Metadata {
   return {
     title: site.title,
     description: site.tagline,
+    icons: { icon: "/favicon.svg" },
   };
 }
 

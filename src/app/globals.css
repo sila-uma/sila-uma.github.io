@@ -1,83 +1,159 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #10131c;
-  --color-ink-soft: #1b2030;
+  --color-ink: #07111f;
+  --color-ink-soft: #10223f;
   --color-paper: #ffffff;
-  --color-paper-tint: #f2f4f8;
-  --color-line: #d7dbe4;
-  --color-amber: #f5a623;
-  --color-red: #d62828;
-  --color-slate: #4b5468;
-
+  --color-paper-tint: #f3f7ff;
+  --color-line: #d8e2f0;
+  --color-amber: #ffcf33;
+  --color-red: #ff4f6d;
+  --color-blue: #246bfd;
+  --color-cyan: #27d7ff;
+  --color-violet: #7957ff;
+  --color-slate: #52627a;
   --font-display: var(--font-unbounded), sans-serif;
   --font-body: var(--font-golos), sans-serif;
   --font-mono: var(--font-jetbrains), monospace;
 }
 
+:root {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+* { box-sizing: border-box; }
+
 body {
+  margin: 0;
+  overflow-x: hidden;
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
 }
 
+::selection { background: var(--color-amber); color: var(--color-ink); }
+
+a, button, input, select, textarea { outline-offset: 4px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--color-cyan);
+}
+
+.section-shell {
+  width: min(100% - 2.5rem, 74rem);
+  margin-inline: auto;
+}
+
 .blueprint-grid {
   background-image:
-    linear-gradient(rgba(245, 166, 35, 0.16) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245, 166, 35, 0.16) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(rgba(39, 215, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(39, 215, 255, 0.1) 1px, transparent 1px);
+  background-size: 34px 34px;
 }
 
-.corner-ticks {
-  position: relative;
+.dot-grid {
+  background-image: radial-gradient(rgba(36, 107, 253, 0.18) 1px, transparent 1px);
+  background-size: 18px 18px;
 }
-.corner-ticks::before,
-.corner-ticks::after {
+
+.hero-glow {
+  background:
+    radial-gradient(circle at 82% 20%, rgba(39, 215, 255, 0.26), transparent 28rem),
+    radial-gradient(circle at 12% 88%, rgba(121, 87, 255, 0.22), transparent 32rem),
+    var(--color-ink);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 1.6rem;
+  height: 0.2rem;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+.glass-panel {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(18px);
+}
+
+.soft-panel {
+  border: 1px solid var(--color-line);
+  background: var(--color-paper);
+  box-shadow: 0 1rem 3rem rgba(7, 17, 31, 0.06);
+}
+
+.corner-ticks { position: relative; }
+.corner-ticks::before, .corner-ticks::after {
   content: "";
   position: absolute;
-  width: 10px;
-  height: 10px;
-  border-color: var(--color-amber);
-  opacity: 0.7;
+  width: 12px;
+  height: 12px;
+  border-color: var(--color-cyan);
+  pointer-events: none;
 }
-.corner-ticks::before {
-  top: -1px;
-  left: -1px;
-  border-top: 1.5px solid;
-  border-left: 1.5px solid;
-}
-.corner-ticks::after {
-  bottom: -1px;
-  right: -1px;
-  border-bottom: 1.5px solid;
-  border-right: 1.5px solid;
+.corner-ticks::before { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
+.corner-ticks::after { right: -1px; bottom: -1px; border-right: 2px solid; border-bottom: 2px solid; }
+
+.color-stripe {
+  background: linear-gradient(90deg, var(--color-cyan) 0 33%, var(--color-amber) 33% 66%, var(--color-red) 66% 100%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .animate-in {
-    animation: fade-up 0.7s ease-out both;
-  }
-}
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
+  .animate-in { animation: fade-up 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .float-slow { animation: float 5s ease-in-out infinite; }
   .constellation-line {
-    stroke-dasharray: 200;
-    stroke-dashoffset: 200;
-    animation: draw 1.6s ease-out forwards;
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: draw 1.7s ease-out forwards;
+  }
+  .constellation-node {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: node-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   }
 }
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes node-in {
+  from { opacity: 0; transform: scale(0.72); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 640px) {
+  .section-shell { width: min(100% - 2rem, 74rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
 }

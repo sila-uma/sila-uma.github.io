@@ -4,13 +4,14 @@ import type { Direction } from "@/lib/content";
 
 export function Contacts({ contacts, directions }: { contacts: ContactsSettings; directions: Direction[] }) {
   return (
-    <section id="contacts" className="py-24 bg-[var(--color-ink)] text-white blueprint-grid">
-      <div className="mx-auto max-w-6xl px-5 grid md:grid-cols-2 gap-16">
+    <section id="contacts" className="hero-glow blueprint-grid py-20 text-white md:py-28">
+      <div className="section-shell grid gap-12 md:grid-cols-[.8fr_1.2fr] md:gap-16">
         <div>
-          <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.15em] text-[var(--color-amber)] mb-4">
+          <p className="eyebrow mb-5 text-[var(--color-cyan)]">
             {contacts.title}
           </p>
-          <p className="text-lg leading-relaxed max-w-sm">{contacts.address}</p>
+          <h2 className="section-title mb-6">Начни свой проект здесь</h2>
+          <p className="max-w-sm text-lg leading-relaxed text-white/72">{contacts.address}</p>
           <dl className="mt-8 space-y-3 text-sm">
             {contacts.phone && (
               <div className="flex gap-3">
@@ -43,9 +44,9 @@ export function Contacts({ contacts, directions }: { contacts: ContactsSettings;
               </div>
             )}
           </dl>
-          {contacts.note && <p className="mt-8 text-xs text-white/40 max-w-sm">{contacts.note}</p>}
+          {contacts.note && <p className="mt-8 max-w-sm text-xs text-white/40">{contacts.note}</p>}
         </div>
-        <div id="form" className="bg-white text-[var(--color-ink)] p-8 corner-ticks">
+        <div id="form" className="rounded-[2rem] bg-white p-6 text-[var(--color-ink)] shadow-2xl sm:p-9">
           <ContactForm directions={directions} />
         </div>
       </div>

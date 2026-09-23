@@ -35,15 +35,15 @@ export function ContactForm({ directions }: { directions: Direction[] }) {
 
   if (status === "sent") {
     return (
-      <div className="corner-ticks border border-[var(--color-amber)] bg-[var(--color-paper)] p-8 text-center max-w-xl mx-auto">
-        <p className="font-[family-name:var(--font-display)] font-bold text-xl mb-2">Заявка отправлена</p>
+      <div className="mx-auto max-w-xl rounded-3xl border border-[var(--color-cyan)] bg-[var(--color-paper)] p-8 text-center">
+        <p className="mb-2 font-[family-name:var(--font-display)] text-xl font-bold">Заявка отправлена</p>
         <p className="text-sm text-[var(--color-slate)]">Мы свяжемся с вами в ближайшее время.</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
+    <form onSubmit={handleSubmit} className="mx-auto max-w-xl space-y-5">
       <input
         type="text"
         name="company"
@@ -52,36 +52,40 @@ export function ContactForm({ directions }: { directions: Direction[] }) {
         aria-hidden="true"
         className="absolute -left-[9999px] w-px h-px overflow-hidden"
       />
+      <div className="mb-7">
+        <p className="eyebrow mb-3 text-[var(--color-blue)]">Заявка</p>
+        <h3 className="font-[family-name:var(--font-display)] text-2xl font-black tracking-tight sm:text-3xl">Расскажите, что вам интересно</h3>
+      </div>
       <div>
-        <label htmlFor="name" className="block text-xs font-[family-name:var(--font-mono)] uppercase tracking-wide mb-1.5">
+        <label htmlFor="name" className="mb-2 block text-sm font-bold">
           Имя
         </label>
         <input
           id="name"
           name="name"
           required
-          className="w-full border border-[var(--color-line)] bg-[var(--color-paper)] px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-amber)]"
+          className="w-full rounded-xl border border-[var(--color-line)] bg-[var(--color-paper-tint)] px-4 py-3.5 text-base transition focus:border-[var(--color-blue)] focus:bg-white focus:outline-none"
         />
       </div>
       <div>
-        <label htmlFor="contact" className="block text-xs font-[family-name:var(--font-mono)] uppercase tracking-wide mb-1.5">
+        <label htmlFor="contact" className="mb-2 block text-sm font-bold">
           Телефон или e-mail
         </label>
         <input
           id="contact"
           name="contact"
           required
-          className="w-full border border-[var(--color-line)] bg-[var(--color-paper)] px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-amber)]"
+          className="w-full rounded-xl border border-[var(--color-line)] bg-[var(--color-paper-tint)] px-4 py-3.5 text-base transition focus:border-[var(--color-blue)] focus:bg-white focus:outline-none"
         />
       </div>
       <div>
-        <label htmlFor="direction" className="block text-xs font-[family-name:var(--font-mono)] uppercase tracking-wide mb-1.5">
+        <label htmlFor="direction" className="mb-2 block text-sm font-bold">
           Направление
         </label>
         <select
           id="direction"
           name="direction"
-          className="w-full border border-[var(--color-line)] bg-[var(--color-paper)] px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-amber)]"
+          className="w-full rounded-xl border border-[var(--color-line)] bg-[var(--color-paper-tint)] px-4 py-3.5 text-base transition focus:border-[var(--color-blue)] focus:bg-white focus:outline-none"
         >
           {directions.map((d) => (
             <option key={d.slug} value={d.title}>
@@ -91,20 +95,20 @@ export function ContactForm({ directions }: { directions: Direction[] }) {
         </select>
       </div>
       <div>
-        <label htmlFor="message" className="block text-xs font-[family-name:var(--font-mono)] uppercase tracking-wide mb-1.5">
+        <label htmlFor="message" className="mb-2 block text-sm font-bold">
           Сообщение
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
-          className="w-full border border-[var(--color-line)] bg-[var(--color-paper)] px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-amber)]"
+          className="w-full resize-y rounded-xl border border-[var(--color-line)] bg-[var(--color-paper-tint)] px-4 py-3.5 text-base transition focus:border-[var(--color-blue)] focus:bg-white focus:outline-none"
         />
       </div>
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full rounded-full bg-[var(--color-ink)] text-white font-[family-name:var(--font-mono)] text-xs uppercase tracking-wide font-bold px-6 py-3.5 hover:bg-[var(--color-amber)] hover:text-[var(--color-ink)] transition-colors disabled:opacity-50"
+        className="w-full rounded-full bg-[var(--color-blue)] px-6 py-4 text-sm font-bold text-white shadow-[0_12px_28px_rgba(36,107,253,.22)] transition hover:-translate-y-0.5 hover:bg-[var(--color-violet)] disabled:opacity-50"
       >
         {status === "sending" ? "Отправляем…" : "Отправить заявку"}
       </button>

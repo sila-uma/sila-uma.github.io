@@ -2,12 +2,12 @@ import type { SimpleSettings } from "@/lib/content";
 
 export function SimpleSection({ id, data }: { id: string; data: SimpleSettings }) {
   return (
-    <section id={id} className="py-24 bg-[var(--color-paper)]">
-      <div className="mx-auto max-w-6xl px-5">
-        <h2 className="font-[family-name:var(--font-display)] font-bold text-3xl md:text-4xl leading-tight mb-6 max-w-xl">
+    <section id={id} className="bg-[var(--color-paper)] py-20 md:py-28">
+      <div className="section-shell">
+        <h2 className="section-title mb-6 max-w-3xl">
           {data.title}
         </h2>
-        <p className="text-[15px] leading-relaxed text-[var(--color-slate)] max-w-xl">{data.body}</p>
+        <p className="max-w-2xl text-base leading-relaxed text-[var(--color-slate)]">{data.body}</p>
       </div>
     </section>
   );

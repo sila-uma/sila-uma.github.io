@@ -17,32 +17,36 @@ export function Directions({ directions }: { directions: Direction[] }) {
   const paragraphs = active ? active.body.split("\n\n").map((p) => p.trim()).filter(Boolean) : [];
 
   return (
-    <section id="directions" className="py-24 bg-[var(--color-paper)]">
-      <div className="mx-auto max-w-6xl px-5">
-        <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.15em] text-[var(--color-red)] mb-4">
+    <section id="directions" className="relative overflow-hidden bg-[var(--color-paper)] py-20 md:py-28">
+      <div className="dot-grid absolute inset-y-0 right-0 w-1/3 opacity-50" aria-hidden />
+      <div className="section-shell relative">
+        <p className="eyebrow mb-4 text-[var(--color-blue)]">
           Направления работы
         </p>
-        <h2 className="font-[family-name:var(--font-display)] font-bold text-3xl md:text-4xl leading-tight mb-12 max-w-xl">
-          Шесть направлений подготовки
-        </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {directions.map((d) => {
+        <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <h2 className="section-title max-w-2xl">Найди своё направление</h2>
+          <p className="max-w-sm text-sm leading-relaxed text-[var(--color-slate)]">Открой карточку, чтобы узнать, чему учатся на каждом направлении и какие проекты можно создать.</p>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {directions.map((d, index) => {
             const Icon = DIRECTION_ICONS[d.icon] ?? DIRECTION_ICONS.code;
             return (
               <button
                 key={d.slug}
                 type="button"
                 onClick={() => open(d)}
-                className="corner-ticks group border border-[var(--color-line)] p-6 text-left hover:border-[var(--color-amber)] transition-colors cursor-pointer"
+                className="soft-panel group relative cursor-pointer overflow-hidden rounded-[1.75rem] p-6 text-left transition duration-300 hover:-translate-y-2 hover:border-transparent hover:shadow-[0_24px_60px_rgba(36,107,253,.16)]"
               >
-                <div className="flex items-center justify-between mb-8">
-                  <Icon className="w-8 h-8 text-[var(--color-ink)] group-hover:text-[var(--color-amber)] transition-colors" />
-                  <span className="font-[family-name:var(--font-mono)] text-[11px] tracking-wide text-[var(--color-slate)] border border-[var(--color-line)] rounded-full px-2 py-1">
-                    {d.code}
+                <span className={`absolute inset-x-0 top-0 h-1.5 ${index % 3 === 0 ? "bg-[var(--color-red)]" : index % 3 === 1 ? "bg-[var(--color-cyan)]" : "bg-[var(--color-amber)]"}`} />
+                <div className="mb-10 flex items-center justify-between">
+                  <span className={`grid h-14 w-14 place-items-center rounded-2xl ${index % 3 === 0 ? "bg-[var(--color-red)]/10 text-[var(--color-red)]" : index % 3 === 1 ? "bg-[var(--color-blue)]/10 text-[var(--color-blue)]" : "bg-[var(--color-amber)]/20 text-[var(--color-ink)]"}`}>
+                    <Icon className="h-8 w-8" />
                   </span>
+                  <span className="rounded-full border border-[var(--color-line)] px-3 py-1 font-[family-name:var(--font-mono)] text-[11px] tracking-wide text-[var(--color-slate)]">{d.code}</span>
                 </div>
-                <h3 className="font-[family-name:var(--font-display)] font-bold text-lg mb-2">{d.title}</h3>
-                <p className="text-sm text-[var(--color-slate)] leading-relaxed">{d.summary}</p>
+                <h3 className="mb-3 font-[family-name:var(--font-display)] text-lg font-bold leading-tight">{d.title}</h3>
+                <p className="text-sm leading-relaxed text-[var(--color-slate)]">{d.summary}</p>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--color-blue)]">Подробнее <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span></span>
               </button>
             );
           })}
@@ -54,25 +58,25 @@ export function Directions({ directions }: { directions: Direction[] }) {
         onClick={(e) => {
           if (e.target === dialogRef.current) dialogRef.current?.close();
         }}
-        className="backdrop:bg-[var(--color-ink)]/70 bg-transparent p-0 m-auto max-w-lg w-[calc(100%-2rem)]"
+        className="m-auto w-[calc(100%-2rem)] max-w-lg bg-transparent p-0 backdrop:bg-[var(--color-ink)]/75 backdrop:backdrop-blur-sm"
       >
         {active && (
-          <div className="corner-ticks bg-[var(--color-paper)] border border-[var(--color-line)] p-8 relative">
+          <div className="relative rounded-[2rem] border border-[var(--color-line)] bg-[var(--color-paper)] p-8 shadow-2xl">
             <button
               type="button"
               onClick={() => dialogRef.current?.close()}
               aria-label="Закрыть"
-              className="absolute top-4 right-4 text-[var(--color-slate)] hover:text-[var(--color-ink)] text-xl leading-none"
+              className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-[var(--color-paper-tint)] text-xl leading-none text-[var(--color-slate)] hover:text-[var(--color-ink)]"
             >
               ×
             </button>
             <div className="flex items-center gap-4 mb-6">
-              {ActiveIcon && <ActiveIcon className="w-10 h-10 text-[var(--color-amber)]" />}
+              {ActiveIcon && <span className="grid h-14 w-14 place-items-center rounded-2xl bg-[var(--color-blue)] text-white"><ActiveIcon className="h-8 w-8" /></span>}
               <span className="font-[family-name:var(--font-mono)] text-[11px] tracking-wide text-[var(--color-slate)] border border-[var(--color-line)] rounded-full px-2 py-1">
                 {active.code}
               </span>
             </div>
-            <h3 className="font-[family-name:var(--font-display)] font-bold text-2xl mb-4">{active.title}</h3>
+            <h3 className="mb-4 font-[family-name:var(--font-display)] text-2xl font-bold">{active.title}</h3>
             <div className="space-y-3 text-sm text-[var(--color-slate)] leading-relaxed">
               {paragraphs.map((p, i) => (
                 <p key={i}>{p}</p>

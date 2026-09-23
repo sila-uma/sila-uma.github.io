@@ -16,8 +16,8 @@ export function HeroConstellation({ directions }: { directions: Direction[] }) {
   const nodes = directions.slice(0, 6).map((d, i) => ({ ...d, pos: POSITIONS[i] }));
 
   return (
-    <svg viewBox="0 0 400 400" className="w-full h-auto max-w-md mx-auto" role="img" aria-label="Шесть направлений технопарка">
-      <g stroke="var(--color-amber)" strokeWidth="1" opacity="0.5">
+    <svg viewBox="0 0 400 400" className="mx-auto h-auto w-full max-w-md" role="img" aria-label="Шесть направлений технопарка">
+      <g stroke="var(--color-cyan)" strokeWidth="1.2" opacity="0.55">
         {nodes.map((n) => (
           <line
             key={n.slug}
@@ -29,18 +29,22 @@ export function HeroConstellation({ directions }: { directions: Direction[] }) {
           />
         ))}
       </g>
-      <circle cx={CENTER.x} cy={CENTER.y} r="16" fill="var(--color-ink-soft)" stroke="var(--color-amber)" strokeWidth="1.5" />
-      <text x={CENTER.x} y={CENTER.y + 4} textAnchor="middle" fontSize="8" fill="var(--color-amber)" fontFamily="var(--font-mono)">
+      <circle cx={CENTER.x} cy={CENTER.y} r="26" fill="var(--color-amber)" />
+      <circle cx={CENTER.x} cy={CENTER.y} r="35" fill="none" stroke="white" strokeOpacity="0.18" />
+      <text x={CENTER.x} y={CENTER.y + 4} textAnchor="middle" fontSize="10" fontWeight="700" fill="var(--color-ink)" fontFamily="var(--font-mono)">
         СУ
       </text>
-      {nodes.map((n) => {
+      {nodes.map((n, index) => {
         const Icon = DIRECTION_ICONS[n.icon] ?? DIRECTION_ICONS.code;
         return (
-          <g key={n.slug}>
-            <circle cx={n.pos.x} cy={n.pos.y} r="28" fill="var(--color-ink)" stroke="var(--color-amber)" strokeWidth="1.25" />
+          <g key={n.slug} className="constellation-node" style={{ animationDelay: `${0.12 + index * 0.08}s` }}>
+            <circle cx={n.pos.x} cy={n.pos.y} r="31" fill={index % 3 === 0 ? "var(--color-red)" : index % 3 === 1 ? "var(--color-blue)" : "var(--color-violet)"} stroke="white" strokeOpacity="0.24" strokeWidth="1.5" />
             <g transform={`translate(${n.pos.x - 11}, ${n.pos.y - 11})`}>
-              <Icon className="w-[22px] h-[22px] text-amber-400" />
+              <Icon className="h-[22px] w-[22px] text-white" />
             </g>
+            <text x={n.pos.x} y={n.pos.y + 45} textAnchor="middle" fontSize="8" fill="white" fillOpacity="0.72" fontFamily="var(--font-mono)">
+              {n.code}
+            </text>
           </g>
         );
       })}
