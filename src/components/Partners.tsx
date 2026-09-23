@@ -4,12 +4,9 @@ export function Partners({ partners }: { partners: Partner[] }) {
   return (
     <section id="partners" className="bg-white py-20 md:py-28">
       <div className="section-shell">
-        <p className="eyebrow mb-4 text-[var(--color-blue)]">
+        <p className="eyebrow mb-12 text-[var(--color-blue)]">
           Партнёры
         </p>
-        <h2 className="section-title mb-12 max-w-3xl">
-          При поддержке
-        </h2>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {partners.map((p) => (
             <a
