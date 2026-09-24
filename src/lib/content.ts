@@ -31,7 +31,6 @@ export type Section = { id: string; visible: boolean };
 export type SiteSettings = {
   title: string;
   tagline: string;
-  hero_kicker: string;
   hero_headline: string;
   hero_subline: string;
   hero_cta_label: string;
@@ -41,7 +40,6 @@ export type SiteSettings = {
 
 export type AboutSettings = {
   visible: boolean;
-  eyebrow: string;
   title: string;
   body: string;
   stats: { value: string; label: string }[];
@@ -62,8 +60,6 @@ export type SimpleSettings = { visible: boolean; title: string; body: string };
 
 export type Direction = {
   title: string;
-  code: string;
-  icon: string;
   order: number;
   visible: boolean;
   summary: string;
@@ -77,16 +73,6 @@ export type NewsItem = {
   visible: boolean;
   cover?: string;
   summary: string;
-  slug: string;
-  body: string;
-};
-
-export type Partner = {
-  title: string;
-  order: number;
-  visible: boolean;
-  logo: string;
-  url: string;
   slug: string;
   body: string;
 };
@@ -128,10 +114,6 @@ export function getDirections(): Direction[] {
 export function getNews(): NewsItem[] {
   const items = readCollection<NewsItem>("news");
   return [...items].sort((a, b) => (a.date < b.date ? 1 : -1));
-}
-
-export function getPartners(): Partner[] {
-  return readCollection<Partner>("partners");
 }
 
 export function isVisible(sections: Section[], id: string, fallback = true): boolean {

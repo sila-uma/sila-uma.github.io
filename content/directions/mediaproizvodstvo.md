@@ -1,7 +1,5 @@
 ---
 title: Медиапроизводство
-code: МЕД
-icon: camera
 order: 6
 visible: true
 summary: Съёмка, монтаж и создание видео- и медиапроектов.

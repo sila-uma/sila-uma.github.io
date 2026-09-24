@@ -38,8 +38,8 @@ KEY-----` без самого ключа. Base64 убирает переносы
      --memory 128m \
      --execution-timeout 10s \
      --source-path . \
-     --environment GITHUB_APP_ID=5023218 \
-     --environment GITHUB_INSTALLATION_ID=163545663 \
+     --environment GITHUB_APP_ID="<app-id>" \
+     --environment GITHUB_INSTALLATION_ID="<installation-id>" \
      --environment GITHUB_REPO=sila-uma/sila-uma.github.io \
      --environment ALLOWED_ORIGIN=https://sila-uma.github.io \
      --environment GITHUB_PRIVATE_KEY_B64="$(base64 < /path/to/private-key.pem | tr -d '\n')"
@@ -76,11 +76,8 @@ create …`) — Yandex Cloud создаёт новую версию функц�
 публичный URL. Yandex не хранит переменные окружения между версиями — при
 каждом обновлении их нужно передавать заново целиком, включая ключ.
 
-## Текущий деплой (для справки)
+## Безопасность
 
-- Функция: `sila-uma-gitforms`, id `d4et5lbdm5c461hfveit`
-- Публичный URL: `https://functions.yandexcloud.net/d4et5lbdm5c461hfveit`
-  (это и есть значение `NEXT_PUBLIC_FORMS_ENDPOINT`)
-- Yandex Cloud: cloud `b1gl9o79tmsuo746kie0`, folder `b1ghq8gq2gaah0ohcvfg`
-- GitHub App: `sila-uma`, App ID `5023218`, Installation ID `163545663`
-  (на репозиторий `sila-uma/sila-uma.github.io`)
+Никогда не добавляйте приватный ключ GitHub App или его base64-представление в
+репозиторий. Для рабочего окружения предпочтительно хранить ключ в Yandex
+Lockbox и передавать функции через защищённую переменную.

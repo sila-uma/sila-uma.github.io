@@ -1,7 +1,5 @@
 ---
 title: Промышленный дизайн
-code: ПРД
-icon: cube
 order: 3
 visible: true
 summary: 3D-моделирование и прототипирование реальных изделий.

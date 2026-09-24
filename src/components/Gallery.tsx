@@ -23,8 +23,8 @@ export function Gallery({ gallery }: { gallery: GallerySettings }) {
     document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setActive(null);
-      if (event.key === "ArrowLeft") showPrevious();
-      if (event.key === "ArrowRight") showNext();
+      if (event.key === "ArrowLeft") setActive((index) => index === null ? null : (index - 1 + count) % count);
+      if (event.key === "ArrowRight") setActive((index) => index === null ? null : (index + 1) % count);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {

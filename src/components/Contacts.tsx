@@ -5,7 +5,7 @@ export function Contacts({ contacts }: { contacts: ContactsSettings }) {
     <section id="contacts" className="bg-[var(--color-paper-tint)] py-14 text-white md:py-20">
       <div className="section-shell grid overflow-hidden rounded-[2rem] bg-gradient-to-br from-[var(--color-blue)] to-[var(--color-violet)] shadow-[0_30px_70px_rgba(54,89,255,.18)] md:grid-cols-[1.1fr_.9fr]">
         <div className="p-7 md:p-10">
-          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold leading-tight tracking-[-0.04em] md:text-4xl">Приходите в технопарк «Сила ума»</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold leading-tight tracking-[-0.04em] md:text-4xl">{contacts.title}</h2>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75">Чтобы узнать подробности о программах, расписании и наборе групп, свяжитесь с технопарком.</p>
           <dl className="mt-6 space-y-3 text-sm">
             <div className="flex gap-3">

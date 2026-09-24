@@ -1,6 +1,6 @@
-import type { SiteSettings, Direction } from "@/lib/content";
+import type { SiteSettings } from "@/lib/content";
 
-export function Hero({ site }: { site: SiteSettings; directions: Direction[] }) {
+export function Hero({ site }: { site: SiteSettings }) {
   return (
     <section id="hero" className="hero-glow relative overflow-hidden text-[var(--color-ink)]">
       <div className="section-shell grid min-h-[calc(100svh-4.9rem)] items-center gap-14 py-16 lg:grid-cols-[1.03fr_.97fr] lg:py-20">

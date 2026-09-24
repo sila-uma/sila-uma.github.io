@@ -1,7 +1,5 @@
 ---
 title: IT
-code: IT
-icon: code
 order: 5
 visible: true
 summary: Программирование, веб-разработка и основы алгоритмики.

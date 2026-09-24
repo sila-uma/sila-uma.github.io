@@ -65,7 +65,7 @@ opener → попап:  "authorizing:github"           (эхо, только е�
      --memory 128m \
      --execution-timeout 10s \
      --source-path . \
-     --environment GITHUB_APP_CLIENT_ID=Iv23lijBAIlCb0UzURGQ \
+     --environment GITHUB_APP_CLIENT_ID="<client-id>" \
      --environment GITHUB_APP_CLIENT_SECRET="<секрет из шага 2>" \
      --environment REDIRECT_URI=https://sila-uma.github.io/oauth/callback \
      --environment ALLOWED_ORIGIN=https://sila-uma.github.io
@@ -98,8 +98,8 @@ curl -i "https://functions.yandexcloud.net/<id функции>"
 только реальным логином на `/admin/` — код авторизации одноразовый и
 привязан к живой сессии в браузере.
 
-## Текущий деплой (для справки)
+## Безопасность
 
-- Функция: `sila-uma-decap-oauth`, id `d4em74tq5amiq7d1pb8o`
-- Yandex Cloud: cloud `b1gl9o79tmsuo746kie0`, folder `b1ghq8gq2gaah0ohcvfg`
-- GitHub App: `sila-uma`, App ID `5023218`, Client ID `Iv23lijBAIlCb0UzURGQ`
+Не добавляйте client secret в репозиторий или команды, сохранённые в истории
+shell. Для рабочего окружения храните секрет в Yandex Lockbox либо в защищённых
+переменных окружения функции.

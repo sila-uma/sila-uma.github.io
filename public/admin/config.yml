@@ -21,7 +21,6 @@ collections:
         fields:
           - { label: "Название сайта", name: "title", widget: "string" }
           - { label: "Описание (для поисковиков)", name: "tagline", widget: "text" }
-          - { label: "Надпись над заголовком баннера", name: "hero_kicker", widget: "string" }
           - { label: "Заголовок баннера", name: "hero_headline", widget: "string" }
           - { label: "Подзаголовок баннера", name: "hero_subline", widget: "text" }
           - { label: "Текст кнопки на баннере", name: "hero_cta_label", widget: "string" }
@@ -34,11 +33,10 @@ collections:
               - { label: "ID раздела", name: "id", widget: "string" }
               - { label: "Показывать на сайте", name: "visible", widget: "boolean", default: true }
       - file: "content/settings/about.yml"
-        label: "Раздел «Что такое»"
+        label: "Раздел «О технопарке»"
         name: "about"
         fields:
           - { label: "Показывать раздел", name: "visible", widget: "boolean", default: true }
-          - { label: "Надпись над заголовком", name: "eyebrow", widget: "string" }
           - { label: "Заголовок", name: "title", widget: "string" }
           - { label: "Описание", name: "body", widget: "text" }
           - label: "Цифры"
@@ -93,14 +91,9 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Название", name: "title", widget: "string" }
-      - { label: "Код (короткая метка)", name: "code", widget: "string" }
-      - label: "Иконка"
-        name: "icon"
-        widget: "select"
-        options: ["drone", "robot", "cube", "laser", "code", "camera"]
       - { label: "Порядок", name: "order", widget: "number" }
       - { label: "Показывать", name: "visible", widget: "boolean", default: true }
-      - { label: "Краткое описание (для карточки)", name: "summary", widget: "string" }
+      - { label: "Краткое описание", name: "summary", widget: "string" }
       - { label: "Полное описание", name: "body", widget: "markdown" }
 
   - name: "news"
@@ -115,16 +108,3 @@ collections:
       - { label: "Обложка", name: "cover", widget: "image", required: false }
       - { label: "Краткое описание (для карточки)", name: "summary", widget: "text" }
       - { label: "Текст новости", name: "body", widget: "markdown" }
-
-  - name: "partners"
-    label: "Партнёры"
-    folder: "content/partners"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Название", name: "title", widget: "string" }
-      - { label: "Порядок", name: "order", widget: "number" }
-      - { label: "Показывать", name: "visible", widget: "boolean", default: true }
-      - { label: "Логотип", name: "logo", widget: "image" }
-      - { label: "Ссылка на сайт", name: "url", widget: "string" }
-      - { label: "Описание", name: "body", widget: "markdown" }

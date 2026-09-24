@@ -1,7 +1,5 @@
 ---
 title: Лазерные технологии
-code: ЛЗР
-icon: laser
 order: 4
 visible: true
 summary: Лазерная резка, гравировка и обработка материалов.
