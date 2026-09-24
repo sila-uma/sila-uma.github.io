@@ -9,7 +9,7 @@ const LABELS: Record<string, string> = {
   directions: "Направления",
   news: "Новости",
   gallery: "Галерея",
-  partners: "Партнёры",
+  partners: "При поддержке",
   enrollment: "Как поступить",
   documents: "Документы",
   contacts: "Контакты",

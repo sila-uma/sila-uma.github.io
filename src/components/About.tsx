@@ -7,9 +7,6 @@ export function About({ about }: { about: AboutSettings }) {
     <section id="about" className="overflow-hidden bg-[var(--color-paper-tint)] py-20 md:py-28">
       <div className="section-shell">
         <div className="mb-12 max-w-3xl">
-          <p className="eyebrow mb-5 text-[var(--color-blue)]">
-            {about.eyebrow}
-          </p>
           <h2 className="section-title mb-7 max-w-3xl">
             {about.title}
           </h2>

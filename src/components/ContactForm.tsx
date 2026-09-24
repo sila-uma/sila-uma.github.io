@@ -53,7 +53,6 @@ export function ContactForm({ directions }: { directions: Direction[] }) {
         className="absolute -left-[9999px] w-px h-px overflow-hidden"
       />
       <div className="mb-7">
-        <p className="eyebrow mb-3 text-[var(--color-blue)]">Заявка</p>
         <h3 className="font-[family-name:var(--font-display)] text-2xl font-black tracking-tight sm:text-3xl">Расскажите, что вам интересно</h3>
       </div>
       <div>

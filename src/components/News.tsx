@@ -9,9 +9,6 @@ export function News({ news }: { news: NewsItem[] }) {
   return (
     <section id="news" className="bg-[var(--color-paper-tint)] py-20 text-[var(--color-ink)] md:py-28">
       <div className="section-shell">
-        <p className="eyebrow mb-4 text-[var(--color-blue)]">
-          События
-        </p>
         <h2 className="section-title mb-12 max-w-3xl">
           Новости
         </h2>

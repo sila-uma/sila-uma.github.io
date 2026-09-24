@@ -17,9 +17,6 @@ export function Directions({ directions }: { directions: Direction[] }) {
   return (
     <section id="directions" className="relative overflow-hidden bg-white py-20 md:py-28">
       <div className="section-shell relative">
-        <p className="eyebrow mb-4 text-[var(--color-blue)]">
-          Направления работы
-        </p>
         <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <h2 className="section-title max-w-2xl">Выбери то, что интересно тебе</h2>
           <p className="max-w-sm text-sm leading-relaxed text-[var(--color-slate)]">Открой карточку, чтобы узнать, чему учатся на каждом направлении и какие проекты можно создать.</p>

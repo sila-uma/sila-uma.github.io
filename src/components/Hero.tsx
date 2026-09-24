@@ -5,7 +5,6 @@ export function Hero({ site }: { site: SiteSettings; directions: Direction[] }) 
     <section id="hero" className="hero-glow relative overflow-hidden text-[var(--color-ink)]">
       <div className="section-shell grid min-h-[calc(100svh-4.9rem)] items-center gap-14 py-16 lg:grid-cols-[1.03fr_.97fr] lg:py-20">
         <div className="animate-in relative z-10">
-          <p className="mb-6 inline-flex rounded-full bg-[#eef1ff] px-4 py-2 text-sm font-bold text-[var(--color-blue)]">✦ {site.hero_kicker}</p>
           <h1 className="max-w-3xl whitespace-nowrap font-[family-name:var(--font-display)] text-[clamp(2.35rem,12vw,5rem)] font-black uppercase leading-[0.92] tracking-[-0.075em] lg:text-[clamp(3rem,6vw,5.2rem)]">
             {site.hero_headline.split(" ")[0]}{" "}
             <span className="bg-gradient-to-r from-[var(--color-blue)] to-[var(--color-violet)] bg-clip-text text-transparent">{site.hero_headline.split(" ").slice(1).join(" ")}</span>

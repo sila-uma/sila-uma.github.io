@@ -36,9 +36,6 @@ export function Gallery({ gallery }: { gallery: GallerySettings }) {
   return (
     <section id="gallery" className="bg-[#101426] py-20 text-white md:py-28">
       <div className="section-shell">
-        <p className="eyebrow mb-4 text-[#8fa1ff]">
-          Фотогалерея
-        </p>
         <h2 className="section-title mb-12 max-w-3xl">
           {gallery.title}
         </h2>
